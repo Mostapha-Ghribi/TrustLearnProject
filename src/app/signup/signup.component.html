@@ -1,0 +1,102 @@
+<section class=" bg-image" style="background-image: url('https://mdbootstrap.com/img/Photos/new-templates/search-box/img4.jpg');">
+  <div class="mask d-flex align-items-center h-100 gradient-custom-3">
+    <div class="container h-100">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-12 col-md-9 col-lg-7 col-xl-6">
+          <div class="card" style="border-radius: 15px;">
+            <div class="card-body p-5">
+              <h2 class="text-uppercase text-center mb-5">Student registration form</h2>
+
+              <form [formGroup]="myForm" (ngSubmit)="signup()">
+
+                <div class="form-outline mb-4">
+                  <label class="form-label" for="form3Example1cg">First Name</label>
+                  <input type="text" id="form3Example1cg" class="form-control form-control-lg" placeholder="First Name" formControlName="firstname"/>
+                  <div *ngIf="firstname.touched && firstname.invalid">
+                    <small *ngIf="firstname.errors.required" class="text-danger">Firstname is required<br></small>
+                    <small *ngIf="firstname.errors.pattern" class="text-danger">Invalid Firstname<br></small>
+                    <small *ngIf="firstname.errors.minlength" class="text-danger">Firstname must contain two characters at least</small>
+                </div>
+                  
+                </div>
+                <div class="form-outline mb-4">
+                  <label class="form-label" for="form3Example1cg">Last Name</label>
+                  <input type="text" id="form3Example1cg" class="form-control form-control-lg" placeholder="Last Name" formControlName="lastname"/>
+                  <div *ngIf="lastname.touched && lastname.invalid">
+                    <small *ngIf="lastname.errors.required" class="text-danger">lastname is required<br></small>
+                    <small *ngIf="lastname.errors.pattern" class="text-danger">Invalid lastname<br></small>
+                    <small *ngIf="lastname.errors.minlength" class="text-danger">lastname must contain two characters at least</small>
+                </div>
+                  
+                </div>
+                <div class="form-outline mb-4">
+                  <label class="form-label" for="form3Example3cg">Your Email</label>
+                  <input type="email" id="form3Example3cg" class="form-control form-control-lg" placeholder="exemple@gmail.com" formControlName="email" />
+                  <div *ngIf="email.touched && email.invalid">
+                    <small *ngIf="email.errors.required" class="text-danger">Email is required<br></small>
+                    <small *ngIf="email.errors.pattern" class="text-danger">Invalid Email<br></small>
+                </div>
+                  
+                </div>
+
+                <div class="form-outline mb-4">
+                  <label class="form-label" for="form3Example4cg">Password</label>
+                  <input type="password" id="form3Example4cg" class="form-control form-control-lg" placeholder="Tap Your Password" formControlName="password"/>
+                  <div *ngIf="password.touched && password.invalid">
+                    <small *ngIf="password.errors.required" class="text-danger">password is required<br></small>
+                    <small *ngIf="password.errors.minlength" class="text-danger">Too short<br></small>
+                </div>
+                  
+                </div>
+
+                <div class="form-outline mb-4">
+                  <label class="form-label" for="form3Example4cdg">Repeat your password</label>
+                  <input type="password" id="form3Example4cdg" class="form-control form-control-lg" placeholder="Confirm Password" formControlName="repassword"/>
+                  <div *ngIf="repassword.touched && repassword.invalid">
+                    <small *ngIf="repassword.errors.required" class="text-danger">Repeat Password is required<br></small>
+                </div>
+                <div *ngIf="repassword.valid && repassword.value != password.value" class="text-danger">
+                    The passwords entered do not match
+                </div>
+                  
+                </div>
+
+                <div class="form-outline mb-4">
+                  <label class="form-label" for="form3Example3cg">Your Phone</label>
+                  <input type="text" id="form3Example3cg" class="form-control form-control-lg" placeholder="Your Phone Number" formControlName="phone"/>
+                  <div *ngIf="phone.touched && phone.invalid">
+                    <small *ngIf="phone.errors.required" class="text-danger">phone is required<br></small>
+                    <small *ngIf="phone.errors.pattern" class="text-danger">Invalid phone<br></small>
+                    <small *ngIf="phone.errors.minlength" class="text-danger">Invalid phone<br></small>
+                </div>
+                  
+                </div>
+
+                <div class="form-outline mb-4">
+                  <label class="form-label" for="form3Example3cg">Your Role</label>
+                  <select class="form-control form-control-lg" formControlName="role">
+                    <option  disabled>Choose...</option>
+                    <option>Student</option>
+                    <option>Trainer</option>
+                  </select>
+                  <div *ngIf="role.touched && role.invalid">
+                    <small *ngIf="phone.errors.required" class="text-danger">Role is required<br></small>
+                </div>
+                  
+                </div>
+
+                <div class="d-flex justify-content-center">
+                  <button type="submit" [disabled]="myForm.invalid || repassword.value != password.value" class="btn btn-success btn-block btn-lg gradient-custom-4 text-body">Register</button>
+                </div>
+
+                <p class="text-center text-muted mt-5 mb-0">Have already an account? <a [routerLink]="['/signin']" class="fw-bold text-body"><u>Login here</u></a></p>
+
+              </form>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
