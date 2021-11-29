@@ -1,9 +1,12 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "cli": {
+    "analytics": "6c75da30-66e0-425d-80d6-ce27c1734595"
+  },
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "Trust-Learn": {
+    "e-learning": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:application": {
@@ -17,7 +20,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/Trust-Learn",
+            "outputPath": "dist/e-learning",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -68,10 +71,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "Trust-Learn:build:production"
+              "browserTarget": "e-learning:build:production"
             },
             "development": {
-              "browserTarget": "Trust-Learn:build:development"
+              "browserTarget": "e-learning:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -79,7 +82,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "Trust-Learn:build"
+            "browserTarget": "e-learning:build"
           }
         },
         "test": {
@@ -102,5 +105,5 @@
       }
     }
   },
-  "defaultProject": "Trust-Learn"
+  "defaultProject": "e-learning"
 }

@@ -1,0 +1,27 @@
+<header id="header" class="fixed-top">
+    <div class="container d-flex align-items-center">
+
+        <h1 class="logo me-auto"><a [routerLink]="['/']">Trustlearn</a></h1>
+
+
+        <nav id="navbar" class="navbar order-last order-lg-0">
+            <ul>
+                <li><a routerLinkActive="active" [routerLink]="['/home']">Home</a></li>
+                <li><a routerLinkActive="active" [routerLink]="['/aboutus']">About</a></li>
+                <li><a routerLinkActive="active" [routerLink]="['/courses']">Courses</a></li>
+                <li><a routerLinkActive="active" [routerLink]="['/trainers']">Trainers</a></li>
+                <li><a routerLinkActive="active" [routerLink]="['/events']">Events</a></li>
+                <li><a routerLinkActive="active" [routerLink]="['/contactus']">Contact</a></li>
+                <li><a *ngIf="isLoggedIn" routerLinkActive="active" [routerLink]="['/dashboard']">Dashboard</a></li>
+            </ul>
+            <i class="bi bi-list mobile-nav-toggle"></i>
+        </nav>
+        <!-- .navbar -->
+
+        <a [routerLink]="['/login']" *ngIf="!isLoggedIn" class="get-started-btn">Get Started</a>
+        <li class="nav-item ">
+            <button *ngIf="isLoggedIn" class="btn btn-sm btn-danger mt ms-2" (click)="logout()">Logout</button>
+        </li>
+
+    </div>
+</header>
