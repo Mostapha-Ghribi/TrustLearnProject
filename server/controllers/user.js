@@ -426,7 +426,7 @@ const ValidationSchema = Joi.object({
 const getAllStudents = async(req,res) =>{
     try{
         const AllStudents = await Student.find();
-        if(!AllStudents){
+        if(!AllStudents.length){
             return res.status(200).json({message : "there is no students here"})
         }
         return res.status(200).json(AllStudents);
@@ -438,7 +438,7 @@ const getAllStudents = async(req,res) =>{
 const getAllTeachers = async(req,res) =>{
     try{
         const AllTeachers = await Teacher.find();
-        if(AllTeachers == []){
+        if(!AllTeachers.length){
             return res.status(200).json({message : "there is no teachers here"})
         }
         return res.status(200).json(AllTeachers);
@@ -446,4 +446,15 @@ const getAllTeachers = async(req,res) =>{
         return res.status(400).json({error : "something wrong error : "+error})
     }
 }
-module.exports = {signin , signup , verifyEmail , resetPassword , forgetPassword, getAllStudents, getAllTeachers}
+
+const getStudentByEmail = async(req,res) => {
+    const {email} = req.body;
+    try{
+        const student = await Student.findOne({email : email});
+            if(!student) return res.status(200).json({message : "there is no student by this email : "+email })
+            return res.status(200).json(student)
+    }catch(error){
+        return res.status(400).json({error : "something wrong error : "+error})
+    }
+}
+module.exports = {signin , signup , verifyEmail , resetPassword ,getStudentByEmail, forgetPassword, getAllStudents, getAllTeachers}

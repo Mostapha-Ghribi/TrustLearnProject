@@ -48,14 +48,6 @@ const getAllCourses = async (req,res) =>{
      }
 }
 
- const getCourseById = async (req,res) =>{
-    try{
-        const Courses = await Course.findById(req.params.course_id);
-        res.status(200).json({result : Courses});
-    }catch(error){
-        res.status(500).json({message : 'Course not found ! '});
-     }
-}
 
 
 
@@ -153,11 +145,11 @@ try{
 }
 };
 //!-------------------------------------------------------------------------------------
-const getFullCourse = async (req,res) =>{
+const getCourseByName = async (req,res) =>{
     try{
-    const {course_id} = req.body;
-    const course_1 = await Course.findOne({_id : course_id});
-    const course_2 = await Course.findOne({_id : course_id},'_id name description teacher price');
+    const {name} = req.body;
+    const course_1 = await Course.findOne({name : name});
+    const course_2 = await Course.findOne({name : name},'_id name description teacher price');
     const AllChaps = course_1.chapters;
     console.log(AllChaps)
     const chapitre_1 = await Chapter.findOne({_id : {$in :AllChaps}},'_id name description');
@@ -185,4 +177,4 @@ const getFullCourse = async (req,res) =>{
         
 }
 
-module.exports = {getFullCourse, createCourse , updateCourse , deleteCourse , getAllCourses , getAllVideoInCourse , getCourseById , getCourseByTeacher}
+module.exports = {getCourseByName, createCourse , updateCourse , deleteCourse , getAllCourses , getAllVideoInCourse  , getCourseByTeacher}
