@@ -49,7 +49,7 @@ const ValidationSchema = Joi.object({
 }
 
  const signup = async (req,res) => {
-    const {email, password , firstname, lastname, confirmpassword, phone,role} = req.body;
+    const {email, password , firstname, lastname,role} = req.body;
     const {errorSignUp} = ValidationSchema.validate(req.body);
     try {
         if(errorSignUp){
@@ -63,7 +63,7 @@ const ValidationSchema = Joi.object({
             case "student":
                 const existingStudent = await Student.findOne({email});
            if(existingStudent) return res.status(500).json({message : "Student Already exists."});  
-           if(password !== confirmpassword) return res.status(400).json({message : "Password don't match."});
+          // if(password !== confirmpassword) return res.status(400).json({message : "Password don't match."});
    
            const hashedPasswordStudent = await bcrypt.hash(password, 12);
            const EmailTokenStudent = crypto.randomBytes(64).toString('hex');
@@ -74,7 +74,6 @@ const ValidationSchema = Joi.object({
                name: `${firstname} ${lastname}`,
                isVerified : false,
                emailToken : EmailTokenStudent,
-               phone
            })
    
            const msgStudent = {

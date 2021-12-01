@@ -9,12 +9,12 @@ import { JwtHelperService } from "@auth0/angular-jwt";
 export class UserService {
 
 
-  private addUserUrl = "http://localhost:8080/users/register";
+  private addUserUrl = "http://localhost:8000/api/user/signup";
   private allUsersUrl = "http://localhost:8080/users/all";
   private getOneUserUrl = "http://localhost:8080/users/one/";
   private updateUserUrl = "http://localhost:8080/users/update";
   private deleteUserUrl = "http://localhost:8080/users/delete/";
-  private loginUserUrl = "http://localhost:8080/users/login";
+  private loginUserUrl = "http://localhost:8000/api/user/signin";
 
 
   constructor(private http: HttpClient) { }

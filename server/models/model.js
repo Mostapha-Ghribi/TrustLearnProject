@@ -52,7 +52,6 @@ const studentSchema = mongoose.Schema({
     emailToken : String,
     password:{type : String, required : true},
     isVerified : Boolean,
-    phone:{type : String, required : true},
     enrolledCourses_id : [],
     resetLink:{data : String,default:''}
 },{timestamps:true})
@@ -65,7 +64,6 @@ const teacherSchema = new mongoose.Schema({
     emailToken : String,
     password:{type : String, required : true},
     isVerified : Boolean,
-    phone:{type : String, required : true},
     CoursesCreated_id : [],
     resetLink:{data : String,default:''}
 },{timestamps:true})

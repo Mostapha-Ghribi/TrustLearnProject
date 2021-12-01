@@ -22,6 +22,9 @@ export class LoginComponent implements OnInit {
       password: new FormControl('', [
         Validators.required,
         Validators.minLength(6)
+      ]),
+      role: new FormControl('', [
+        Validators.required,
       ])
     }
 
@@ -31,6 +34,7 @@ export class LoginComponent implements OnInit {
 
   get email() { return this.loginForm.get('email'); }
   get password() { return this.loginForm.get('password'); }
+  get role() { return this.loginForm.get('role');  }
 
   ngOnInit(): void {
 
@@ -43,7 +47,7 @@ export class LoginComponent implements OnInit {
 
   login(){
   let data = this.loginForm.value;
-    let user = new User(undefined, undefined, undefined, data.email, data.password)
+    let user = new User(undefined, undefined, undefined, data.email, data.password, data.role)
 
     console.log(user);
 

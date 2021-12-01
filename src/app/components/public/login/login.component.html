@@ -26,6 +26,14 @@
                             <small *ngIf="password?.errors?.minlength" class="text-danger">password must contain 6 characters at least</small>
                         </div>
                     </div>
+                    <label for="role" id="role" class="label">Role : </label>
+                    <select formControlName="role" style="margin-bottom: 10px;" class="custom-select">                                      
+       <option value="student" selected>student</option>
+       <option value="teacher">teacher</option>
+       <div *ngIf="role?.touched && role?.invalid">
+        <small *ngIf="role?.errors?.required" class="text-danger">role is required<br></small>
+    </div>
+     </select>
                     <div class="group">
                         <input id="check" type="checkbox" class="check" checked>
                         <label for="check"><span class="icon"></span> Keep me Signed in</label>
