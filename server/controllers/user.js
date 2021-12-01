@@ -422,4 +422,28 @@ const ValidationSchema = Joi.object({
         })
     }
 }
-module.exports = {signin , signup , verifyEmail , resetPassword , forgetPassword}
+
+const getAllStudents = async(req,res) =>{
+    try{
+        const AllStudents = await Student.find();
+        if(!AllStudents){
+            return res.status(200).json({message : "there is no students here"})
+        }
+        return res.status(200).json(AllStudents);
+    }catch(error){
+        return res.status(400).json({error : "something wrong error : "+error})
+    }
+}
+
+const getAllTeachers = async(req,res) =>{
+    try{
+        const AllTeachers = await Teacher.find();
+        if(AllTeachers == []){
+            return res.status(200).json({message : "there is no teachers here"})
+        }
+        return res.status(200).json(AllTeachers);
+    }catch(error){
+        return res.status(400).json({error : "something wrong error : "+error})
+    }
+}
+module.exports = {signin , signup , verifyEmail , resetPassword , forgetPassword, getAllStudents, getAllTeachers}

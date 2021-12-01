@@ -9,24 +9,27 @@ import { JwtHelperService } from "@auth0/angular-jwt";
 export class UserService {
 
 
-  private addUserUrl = "http://localhost:8000/api/user/signup";
+  private signUp = "http://localhost:8000/api/user/signup";
+  private signIn = "http://localhost:8000/api/user/signin";
+  private verifyEmail = "http://localhost:8000/api/user/verify-email";
+  private forgetPassword = "http://localhost:8000/api/user/forget-password";
+  private resetPassword = "http://localhost:8000/api/user/reset-password";
   private allUsersUrl = "http://localhost:8080/users/all";
   private getOneUserUrl = "http://localhost:8080/users/one/";
   private updateUserUrl = "http://localhost:8080/users/update";
   private deleteUserUrl = "http://localhost:8080/users/delete/";
-  private loginUserUrl = "http://localhost:8000/api/user/signin";
 
 
   constructor(private http: HttpClient) { }
 
 
   public addUser(user: User) {
-    let dataFromAPI = this.http.post<any>(this.addUserUrl, user);
+    let dataFromAPI = this.http.post<any>(this.signUp, user);
     return dataFromAPI;
   }
 
   public loginUser(user: User) {
-    let dataFromAPI = this.http.post<any>(this.loginUserUrl, user);
+    let dataFromAPI = this.http.post<any>(this.signIn, user);
     return dataFromAPI;
   }
 
