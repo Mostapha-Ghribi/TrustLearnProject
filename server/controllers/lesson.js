@@ -1,7 +1,7 @@
+//* Importing modules
 const {Course, Chapter, Lesson, Video, Category} = require('../models/model.js')
 //!----------------------------------------------------------------------
-
-// Create Lesson
+//* Create Lesson
 const createLesson = async (req,res) => {
     const {name,chapter} = req.body; // get data from body
     try{
@@ -40,12 +40,33 @@ const createLesson = async (req,res) => {
         res.status(400).json({error : "something wrong "+error})
     }
 };
-
-
-
-
 //!----------------------------------------------------------------------------------------
+// TODO: Delete Lesson
+const deleteLesson = async (req,res)=>{
+    try{
 
+    }catch(error){
+        return res.status(400).json({error : "something went wrong error : "+error})
+    }
+}
+//!----------------------------------------------------------------------------------------
+// TODO: Update Lesson
+const updateLesson = async (req,res)=>{
+    try{
+
+    }catch(error){
+        return res.status(400).json({error : "something went wrong error : "+error})
+    }
+}
+//!----------------------------------------------------------------------------------------
+// TODO: Get Lessons Into Array By Chapter
+const getLessonsByChaptrIntoArray = async (req,res)=>{
+    try{
+
+    }catch(error){
+        return res.status(400).json({error : "something went wrong error : "+error})
+    }
+}
 //Export Modules
 
-module.exports = {createLesson};
+module.exports = {createLesson, deleteLesson, updateLesson, getLessonsByChaptrIntoArray};

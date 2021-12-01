@@ -1,7 +1,7 @@
 const {Course, Chapter, Lesson, Video, Category} = require('../models/model.js')
 //!----------------------------------------------------------------------
 
-// Create Chapter
+//* Create Chapter
 const createChapter = async (req,res) => {
     const {name,description,course} = req.body; // get data from body
     try{
@@ -46,12 +46,33 @@ const createChapter = async (req,res) => {
         res.status(400).json({error : "something wrong "+error})
     }
 };
-
-
-
-
 //!----------------------------------------------------------------------------------------
+// TODO : Delete Chapter
+const deleteChapter = async (req,res) =>{
+    try{
 
+    }catch(error){
+        return res.status(400).json({error : "something went wrong error : "+error})
+    }
+}
+//!----------------------------------------------------------------------------------------
+// TODO : Update Chapter
+const updateChapter = async (req,res) =>{
+    try{
+
+    }catch(error){
+        return res.status(400).json({error : "something went wrong error : "+error})
+    }
+}
+//!----------------------------------------------------------------------------------------
+// TODO : Get Chapters from Course and send it as array
+const getChaptersByCourseIntroArray = async (req,res) =>{
+    try{
+
+    }catch(error){
+        return res.status(400).json({error : "something went wrong error : "+error})
+    }
+}
 //Export Modules
 
-module.exports = {createChapter};
+module.exports = {createChapter, deleteChapter, updateChapter, getChaptersByCourseIntroArray};

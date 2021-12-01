@@ -1,12 +1,13 @@
 const express = require('express')
-const { getAllCourses , createCourse, getCourseByName, getAllVideoInCourse, deleteCourse, updateCourse} = require('../controllers/course.js');
+const { createCourse, deleteCourse, updateCourse, getCourse, getAllCourses, getAllCoursesByCategory, getAllCoursesByTeacher, getCoursesByCategoryIntoArray} = require('../controllers/course.js');
 
 const router = express.Router();
-
-router.post('/Courses' , getAllCourses);
-router.get('/getCourse',getCourseByName);
-router.post('/CreateCourse',createCourse);
-router.get('/Videos/:course_id',getAllVideoInCourse);
-router.delete('/DeleteCourse/:course_id',deleteCourse);
-router.put('/UpdateCourse/:course_id',updateCourse);
+router.post('/CreateCourse',createCourse); // ? Create Course
+router.delete('/DeleteCourse',deleteCourse); // ? Delete Course
+router.put('/UpdateCourse',updateCourse); // ? Update Course
+router.get('/GetCourse', getCourse); // ? Get Course By Name (_id == name)
+router.get('GetAllCourses', getAllCourses); // ? Get ALL Courses (Without Category)
+router.get('GetAllCoursesByCategory',getAllCoursesByCategory); //? Get All Courses (With Category)
+router.get('GetAllCoursesByTeacher',getAllCoursesByTeacher); //? Get All Courses By Teacher
+router.get('GetCoursesByCategoryIntoArray',getCoursesByCategoryIntoArray); //? Get Courses By Category Into Array
 module.exports = router;

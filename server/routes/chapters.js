@@ -1,12 +1,12 @@
 const express = require('express')
-const {createChapter} = require('../controllers/chapter.js');
+const {createChapter, deleteChapter, updateChapter} = require('../controllers/chapter.js');
 
 const router = express.Router();
 
-//router.post('/Courses' , getAllCourses);
-//router.get('/:course_id',getCourseById);
-router.post('/CreateChapter/',createChapter);
-//router.get('/Videos/:course_id',getAllVideoInCourse);
-//router.delete('/DeleteCourse/:course_id',deleteCourse);
-//router.put('/UpdateCourse/:course_id',updateCourse);
+
+router.post('/CreateChapter',createChapter); //? Create Chapter
+router.delete('/DeleteChapter',deleteChapter); //? Delete Chapter
+router.put('/UpdateChapter',updateChapter); //? Update Chapter
+
+
 module.exports = router;
