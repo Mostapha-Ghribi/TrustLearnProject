@@ -1,8 +1,7 @@
-// Requiring Modules !!
+//* Requiring Modules !!
 const {Course, Chapter, Lesson, Video, Category} = require('../models/model.js')
 //!----------------------------------------------------------------------
-
-// Create Category
+//* Create Category
 const createCategory = async (req,res) => {
     const {name} = req.body; // get data from body
     try{
@@ -23,6 +22,31 @@ const createCategory = async (req,res) => {
 }
 }; 
 //!----------------------------------------------------------------------------------------------------
+// TODO: Delete Category
+const deleteCategory = async (req,res)=>{
+    try{
 
-//Exporting module
-module.exports = {createCategory}
+    }catch(error){
+        return res.status(400).json({error : "something went wrong error : "+error})
+    }
+}
+//!----------------------------------------------------------------------------------------------------
+// TODO: Update Category
+const updateCategory = async (req,res)=>{
+    try{
+
+    }catch(error){
+        return res.status(400).json({error : "something went wrong error : "+error})
+    }
+}
+//!----------------------------------------------------------------------------------------------------
+// TODO: Get Categories Names and send it in array
+const getCategoriesNames = async (req,res)=>{
+    try{
+
+    }catch(error){
+        return res.status(400).json({error : "something went wrong error : "+error})
+    }
+}
+//* Exporting module
+module.exports = {createCategory, deleteCategory, updateCategory, getCategoriesNames}

@@ -1,6 +1,7 @@
+//* Importing modules
 const {Lesson, Video} = require('../models/model.js')
-
-
+//!--------------------------------------------------------------------------------------------------------
+//* Create Video
  const createVideo = async (req,res) => {
     const {name,url,lesson} = req.body;
     try{
@@ -28,33 +29,39 @@ const {Lesson, Video} = require('../models/model.js')
         if(!resultVideo || !resultAddToLesson){return res.status(400).json({ error : "something wrong in creating video"})
         }else{res.json({message : "video created successfully"})}
 }catch(error){res.status(400).json({error : "something wrong "+error})}};
-
-
- const DeleteVideo = async (req,res) => {
-    const {course_id, video_id}   = req.params;
+//!--------------------------------------------------------------------------------------------------------
+// TODO: Delete Video
+const deleteVideo = async (req,res) => {
+    const {name} = req.body;
     try{
-    const course = await Course.find({_id: course_id});
-    if(!course){
-        return res.status(400).json({error : "Course not found"})
-    }
-    const video = await Video.find({_id: video_id});
+    const video = await Video.findOne({name: name});
     if(!video){
         return res.status(400).json({error : "Video not found"})
     }
     const resultVideo = await Video.deleteOne({_id : video_id})
-    const resultCourse = await Course.findOneAndUpdate(
-        { _id: course_id },
-         { $pull: { videos: video_id } }, { new: true });
+    const resultLesson = await Lesson.find(
+        { videos: { $elemMatch: name } },
+         { $pull: { videos: name } }, { new: true });
 
-    if(!resultVideo || !resultCourse){
-        return res.status(404).json({ error : "something wrong in deleting video"})
+    if(!resultVideo || !resultLesson){
+        return res.status(400).json({ error : "something wrong in deleting video"})
     }else{
         res.status(200).json({ request: 'Deleted', Video, Course });
     }
 }catch(error){
     return res.status(400).json({error : "something wrong error : "+error})
 }
-};
+} 
+//!--------------------------------------------------------------------------------------------------------
+// TODO: Update Video
+const updateVideo = async (req,res) => {
+    try{
+
+    }catch(error){
+        return res.status(400).json({error : "something wrong error : "+error})
+    }
+} 
+//!--------------------------------------------------------------------------------------------------------
 
  const UpdateVideo = async (req,res) => {
     const {name,url} = req.body;
@@ -81,16 +88,5 @@ const {Lesson, Video} = require('../models/model.js')
 }
 };
 
- const GetVideo =async (req,res) =>{
-    const {video_id} = req.params;
-    try{
-        const video = await Video.findOne({video_id});
-        if(!video){
-            return res.status(400).json({error : "Video not found"});
-        }
-        res.status(200).json(video)
-    }catch(error){
-        return res.status(400).json({error : "something wrong error : "+error})
-    }
-}
-module.exports = {createVideo , DeleteVideo , UpdateVideo , GetVideo}
+
+module.exports = {createVideo , deleteVideo , updateVideo}
