@@ -10,7 +10,7 @@ export class CourseService {
 
   private getAllCourses = "http://localhost:8000/api/course/GetAllCourses"; //? get All courses (Without Category)
   private getAllCoursesByCategory = "http://localhost:8000/api/course/GetAllCoursesByCategory"; //? get All courses (With Category) required {name of the category} 
-  private getCourse = "http://localhost:8000/api/course/GetCourse"; //? get Course required {name of the course } hint(_id == name)
+  private getCourse = "http://localhost:8000/api/course/GetCourse/"; //? get Course required {name of the course } hint(_id == name)
   private getAllCoursesByTeacher = "http://localhost:8000/api/course/GetAllCoursesByTeacher"; //? get All Courses By Teacher required {name of the teacher}
   private getCoursesByCategoryIntoArray = "http://localhost:8000/api/course/getCoursesByCategoryIntoArray"; //? get all courses names by category and store them in array 
   
@@ -39,7 +39,7 @@ export class CourseService {
   }
 
   public getOneCourse(id: any) {
-    return this.http.get<any>(this.getOneCourseUrl + id);
+    return this.http.get<any>(this.getCourse + id);
   }
 
   public updateCourse(course: Course) {

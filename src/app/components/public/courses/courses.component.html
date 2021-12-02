@@ -83,21 +83,21 @@
                     </div>
                     <!-- End Course Item-->
 
-                    <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-lg-0">
+                    <div *ngFor="let course of courselist" class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-lg-0">
                         <div class="course-item">
-                            <img src="assets/img/course-3.jpg" class="img-fluid" alt="...">
+                            <a [routerLink]="['/coursedetail/{{ course.name }}']"><img src="assets/img/course-1.jpg" class="img-fluid" alt="..."></a>
                             <div class="course-content">
                                 <div class="d-flex justify-content-between align-items-center mb-3">
-                                    <h4></h4>
+                                    <h4>{{ course.name }}</h4>
                                     <p class="price">$180</p>
                                 </div>
 
-                                <h3><a href="course-details.html">Copywriting</a></h3>
+                                <h3><a [routerLink]="['/coursedetail',course.name]">{{ course.name }}</a></h3>
                                 <p>Et architecto provident deleniti facere repellat nobis iste. Id facere quia quae dolores dolorem tempore.</p>
                                 <div class="trainer d-flex justify-content-between align-items-center">
                                     <div class="trainer-profile d-flex align-items-center">
                                         <img src="assets/img/trainers/trainer-3.jpg" class="img-fluid" alt="">
-                                        <span></span>
+                                        <span>{{course.teacher}}</span>
                                     </div>
                                     <div class="trainer-rank d-flex align-items-center">
                                         <i class="bx bx-user"></i>&nbsp;20 &nbsp;&nbsp;

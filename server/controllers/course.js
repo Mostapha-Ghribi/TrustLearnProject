@@ -97,7 +97,7 @@ const getCoursesByCategoryIntoArray = async (req,res)=>{
 //* Get Course By Name (_id == name)
 const getCourse = async (req,res) => {
     try{
-        const {name} = req.body;
+        const {name} = req.headers;
         const course_1 = await Course.findOne({name : name});
         const course_2 = await Course.findOne({name : name},'_id name description teacher price');
         const AllChaps = course_1.chapters;
