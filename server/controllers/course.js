@@ -124,9 +124,22 @@ const getCourse = async (req,res) => {
 
 }
 //!-------------------------------------------------------------------------------------
-//TODO: Get All Courses (Without Category)
+//* Get All Courses (Without Category)
 const getAllCourses = async (req,res) => {
     try{
+        const courses = await Course.find({},{name:1,_id:0});
+        var coursesNames = [];
+        var result = [];
+        for await (course of courses){
+            coursesNames.push(course.name);
+        }
+        for await (const CN of coursesNames) {
+            const C = await getCourseByNamewithParam(CN)
+            result.push(C)
+          }
+
+        return res.status(200).json(result);
+
 
     }catch(error){
         return res.status(400).json({error : "something wrong error : "+error})
