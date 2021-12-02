@@ -27,7 +27,7 @@ const createCourse = async (req,res) => {
     }
 }; 
 //!----------------------------------------------------------------------------------------------------
-//TODO: Delete Course 
+//* Delete Course 
 const deleteCourse = async (req,res) => {
     try{
         const {name} = req.body;
