@@ -85,15 +85,15 @@
 
                     <div *ngFor="let course of courselist" class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-lg-0">
                         <div class="course-item">
-                            <a [routerLink]="['/coursedetail/{{ course.name }}']"><img src="assets/img/course-1.jpg" class="img-fluid" alt="..."></a>
+                            <a [routerLink]="['/coursedetail',course.name]"><img src="{{course.image}}" class="img-fluid" alt="..."></a>
                             <div class="course-content">
                                 <div class="d-flex justify-content-between align-items-center mb-3">
                                     <h4>{{ course.name }}</h4>
-                                    <p class="price">$180</p>
+                                    <p class="price">{{course.price}} DT</p>
                                 </div>
 
                                 <h3><a [routerLink]="['/coursedetail',course.name]">{{ course.name }}</a></h3>
-                                <p>Et architecto provident deleniti facere repellat nobis iste. Id facere quia quae dolores dolorem tempore.</p>
+                                <p>{{course.description}}</p>
                                 <div class="trainer d-flex justify-content-between align-items-center">
                                     <div class="trainer-profile d-flex align-items-center">
                                         <img src="assets/img/trainers/trainer-3.jpg" class="img-fluid" alt="">

@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CourseService } from 'src/app/services/course.service';
 import { Course } from 'src/app/models/course';
+import { DomSanitizer } from '@angular/platform-browser';
+
 
 @Component({
   selector: 'app-coursedetail',
@@ -9,20 +11,20 @@ import { Course } from 'src/app/models/course';
   styleUrls: ['./coursedetail.component.css']
 })
 export class CoursedetailComponent implements OnInit {
-
-  constructor(private courseService: CourseService,private route: ActivatedRoute ) { }
+  
+  constructor(private courseService: CourseService,private route: ActivatedRoute) { }
  id:any;
  course! :Course ;
+ image! :Course;
+ 
   ngOnInit(): void {
 
-
     let idc = this.route.snapshot.params.id;
-
 
     this.courseService.getOneCourse(idc).subscribe(
       res=>{
         this.course=res;
-        console.log(idc);
+        console.log(res);
 
       },
       err=>{

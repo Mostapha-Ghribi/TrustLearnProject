@@ -8,7 +8,8 @@ export class Course {
         public price?: DoubleRange,
         public description?: String,
         public teacher?: String,
-        public category?: Category
+        public category?: Category,
+        public image?: String
     ) {
     }
 }

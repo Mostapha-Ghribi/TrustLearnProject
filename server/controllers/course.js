@@ -97,9 +97,9 @@ const getCoursesByCategoryIntoArray = async (req,res)=>{
 //* Get Course By Name (_id == name)
 const getCourse = async (req,res) => {
     try{
-        const {name} = req.headers;
+        const {name} = req.params;
         const course_1 = await Course.findOne({name : name});
-        const course_2 = await Course.findOne({name : name},'_id name description teacher price');
+        const course_2 = await Course.findOne({name : name},'_id name description teacher price image');
         const AllChaps = course_1.chapters;
         const chapitre_1 = await Chapter.findOne({_id : {$in :AllChaps}},'_id name description');
         const chapitre_2 = await Chapter.findOne({_id : {$in :AllChaps}});
@@ -178,7 +178,7 @@ const getAllCoursesByTeacher = async (req,res) => {
 //* Get Course By Name (_id == name) with name as a param
 const getCourseByNamewithParam = async (name) =>{
     const course_1 = await Course.findOne({name : name});
-    const course_2 = await Course.findOne({name : name},'_id name description teacher price');
+    const course_2 = await Course.findOne({name : name},'_id name description teacher price image');
     const AllChaps = course_1.chapters;
     const chapitre_1 = await Chapter.findOne({_id : {$in :AllChaps}},'_id name description');
     const chapitre_2 = await Chapter.findOne({_id : {$in :AllChaps}});
