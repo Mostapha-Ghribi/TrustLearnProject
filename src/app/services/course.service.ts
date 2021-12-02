@@ -30,7 +30,7 @@ export class CourseService {
 
 
   public getAllcourses() {
-    let data = this.http.get<any>(this.allCoursesUrl);
+    let data = this.http.get<any>(this.getAllCourses);
     return data;
   }
 
