@@ -25,10 +25,21 @@ import { ListetudiantComponent } from './components/private/admin/etudiants/list
 import { ListformateursComponent } from './components/private/admin/formateurs/listformateurs/listformateurs.component';
 import { UpdateformationComponent } from './components/private/admin/formations/updateformation/updateformation.component';
 import { ListformationComponent } from './components/private/admin/formations/listformation/listformation.component';
-
+import {Component} from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ToastrModule, ToastNoAnimation, ToastNoAnimationModule } from 'ngx-toastr';
 import { HttpClientModule } from '@angular/common/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatMenuModule} from '@angular/material/menu';
+import {MatIconModule} from '@angular/material/icon';
+import {MatButtonModule} from '@angular/material/button';
+import { StudentcoursesComponent } from './components/public/studentcourses/studentcourses.component';
+import {MatSelectModule} from '@angular/material/select';
+
+
+
+
+
 
 
 @NgModule({
@@ -55,7 +66,8 @@ import { HttpClientModule } from '@angular/common/http';
     ListetudiantComponent,
     ListformateursComponent,
     UpdateformationComponent,
-    ListformationComponent
+    ListformationComponent,
+    StudentcoursesComponent
   ],
   imports: [
     BrowserModule,
@@ -63,7 +75,13 @@ import { HttpClientModule } from '@angular/common/http';
     FormsModule,
     ReactiveFormsModule,
     ToastNoAnimationModule.forRoot(),
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule,
+    MatMenuModule,
+    MatIconModule,
+    MatButtonModule,
+    MatSelectModule,
+    
   ],
   providers: [],
   bootstrap: [AppComponent]

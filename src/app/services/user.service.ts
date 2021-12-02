@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { User } from '../models/user';
 import { JwtHelperService } from "@auth0/angular-jwt";
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -18,6 +19,8 @@ export class UserService {
   private getOneUserUrl = "http://localhost:8080/users/one/";
   private updateUserUrl = "http://localhost:8080/users/update";
   private deleteUserUrl = "http://localhost:8080/users/delete/";
+
+  
 
 
   constructor(private http: HttpClient) { }
@@ -60,6 +63,8 @@ export class UserService {
       return false;
     }
   }
+
+
 
   isLoggedInAdmin() {
     let token = localStorage.getItem("token");

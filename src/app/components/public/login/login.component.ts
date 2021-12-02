@@ -49,12 +49,12 @@ export class LoginComponent implements OnInit {
   let data = this.loginForm.value;
     let user = new User(undefined, undefined, undefined, data.email, data.password, data.role)
 
-    console.log(user);
 
     this.userService.loginUser(user).subscribe(
       res => {
-        console.log(res);
-       let token = res.token ;
+        let token = res.token ;
+        let username=res.result.name;
+        let v=localStorage.setItem("username",username)
         localStorage.setItem("token", token)
         this.router.navigateByUrl('/dashboard')
 

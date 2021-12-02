@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './guards/auth.guard';
 import { AdminGuard } from './guards/admin.guard';
+import { StudentGuard } from './guards/student.guard';
 
 import { HomeComponent } from './components/public/home/home.component';
 import { LoginComponent } from './components/public/login/login.component';
@@ -9,6 +10,7 @@ import { RegisterComponent } from './components/public/register/register.compone
 import { AboutComponent } from './components/public/about/about.component';
 import { ContactComponent } from './components/public/contact/contact.component';
 import { CoursesComponent } from './components/public/courses/courses.component';
+import { StudentcoursesComponent } from './components/public/studentcourses/studentcourses.component';
 import { CoursedetailComponent } from './components/public/coursedetail/coursedetail.component';
 import { TrainersComponent } from './components/public/trainers/trainers.component';
 import { EventsComponent } from './components/public/events/events.component';
@@ -51,6 +53,11 @@ const routes: Routes = [
   {
     path: 'courses',
     component: CoursesComponent
+  },
+  {
+    path: 'mycourses',
+    component: StudentcoursesComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'coursedetail',

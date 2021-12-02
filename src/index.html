@@ -35,9 +35,12 @@
 
     <!-- Template Main CSS File -->
     <link href="./assets/css/style.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 
-<body>
+<body class="mat-typography">
     <app-root></app-root>
 
     <!-- Vendor JS Files -->
@@ -54,6 +57,49 @@
 
     <!-- Template Main JS File -->
     <script src="./assets/js/main.js"></script>
+    <script type='text/javascript'>
+
+
+
+
+
+
+  
+        $(document).on('click','.arrow',function () {
+                var parent = $(this).closest('ul');
+                var child = parent.find("ul:first");
+      
+            var childd=child.closest("li")
+                
+            
+            var displaySetting =child.css("display");
+        
+      
+            
+                  if(displaySetting!="none")
+            {
+      
+            child.attr("style", "display:none");
+            childd.attr("style", "list-style-type: '+';");
+            
+            
+            
+              
+            }
+            else {
+            
+              
+            child.attr("style", "display:block");
+            childd.attr("style", "list-style-type: '-';");
+            
+            
+            
+          
+          
+            }
+          });
+      
+      </script>
 </body>
 
 </html>

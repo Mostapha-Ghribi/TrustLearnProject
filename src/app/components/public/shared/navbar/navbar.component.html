@@ -12,16 +12,28 @@
                 <li><a routerLinkActive="active" [routerLink]="['/trainers']">Trainers</a></li>
                 <li><a routerLinkActive="active" [routerLink]="['/events']">Events</a></li>
                 <li><a routerLinkActive="active" [routerLink]="['/contactus']">Contact</a></li>
-                <li><a *ngIf="isLoggedIn" routerLinkActive="active" [routerLink]="['/dashboard']">Dashboard</a></li>
+                <li><a *ngIf="isLoggedIn" routerLinkActive="active" [routerLink]="['/mycourses']">Mycourses</a></li>
             </ul>
             <i class="bi bi-list mobile-nav-toggle"></i>
         </nav>
         <!-- .navbar -->
 
         <a [routerLink]="['/login']" *ngIf="!isLoggedIn" class="get-started-btn">Get Started</a>
-        <li class="nav-item ">
-            <button *ngIf="isLoggedIn" class="btn btn-sm btn-danger mt ms-2" (click)="logout()">Logout</button>
-        </li>
+        <li *ngIf="isLoggedIn" class="nav-item "><button mat-raised-button color="primary" [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu" >
+            <i class="fas fa-user fa-lg"></i>
+            <p>{{get()}}</p>
+          </button>
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item >
+              <i class="fa fa-cogs"></i>
 
+              <span>Profile</span>
+            </button>
+            <button mat-raised-button color="warn"  *ngIf="isLoggedIn"(click)="logout()">
+              <i class="fas fa-sign-out-alt"></i><span>Logout</span>
+            </button>
+          </mat-menu>
+          
+        </li>
     </div>
 </header>

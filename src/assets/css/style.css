@@ -85,6 +85,14 @@ h6 {
     background: #fff;
 }
 
+
+
+.c{font-size: 14px;
+    background: #5fcf80;
+    
+    color: #fff;
+    border-radius: 4px;}
+
 #preloader:before {
     content: "";
     position: fixed;
@@ -553,7 +561,7 @@ section {
     font-family: "Poppins", sans-serif;
     color: #37423b;
 }
-
+.categ{margin-top: 73px;text-align: center;}
 .breadcrumbs {
     margin-top: 73px;
     text-align: center;
