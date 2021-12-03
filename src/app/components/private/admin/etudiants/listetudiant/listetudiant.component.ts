@@ -14,7 +14,7 @@ export class ListetudiantComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.userService.getAllUsers().subscribe(
+    this.userService.getAllStudents().subscribe(
       result=>{
         this.StudentList = result
         console.log(this.StudentList);

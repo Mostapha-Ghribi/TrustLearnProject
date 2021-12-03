@@ -10,15 +10,15 @@ import { User } from 'src/app/models/user';
 })
 export class ListformateursComponent implements OnInit {
 
-  StudentList = [];
+  TeachersList = [];
   constructor(private userService:UserService,private toastr: ToastrService) { }
 
   ngOnInit(): void {
 
-    this.userService.getAllUsers().subscribe(
+    this.userService.getAllTeachers().subscribe(
       result=>{
-        this.StudentList = result
-        console.log(this.StudentList);
+        this.TeachersList = result
+        console.log(this.TeachersList);
       },
       error=>{
         console.log(error);

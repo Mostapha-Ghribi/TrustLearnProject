@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Category } from 'src/app/models/category';
 import { CategoryService } from 'src/app/services/category.service';
+import { SpinnerService } from 'src/app/spinner.service';
 
 @Component({
   selector: 'app-listcategory',
@@ -11,19 +13,24 @@ export class ListcategoryComponent implements OnInit {
 
   public categories: any[] = [];
 
-  constructor(private categoryService: CategoryService) { }
+  constructor(private categoryService: CategoryService, private service: SpinnerService,    private router:Router    ) { }
 
   ngOnInit(): void {
 
-    this.categoryService.allCategories().subscribe(
+this.service.requestStarted();
+    this.categoryService.getCategories().subscribe(
       res => {
+        this.service.requestEnded();
         this.categories = res;
+
       },
       err => {
+        this.service.resetSpinner();
         console.log(err);
 
       }
     )
+
 
   }
 

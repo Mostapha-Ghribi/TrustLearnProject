@@ -8,7 +8,7 @@ router.post('/signup' , signup);
 router.get('/verify-email' , verifyEmail);
 router.put('/forget-password' , forgetPassword);
 router.put('/reset-password' , resetPassword);
-router.get('/getAllUsers',getAllStudents);
+router.get('/getAllStudents',getAllStudents);
 router.get('/getUser/:email/:role',getUser);
 router.get('/getAllTeachers',getAllTeachers);
 router.get('/getStudentByEmail',getStudentByEmail);

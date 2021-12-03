@@ -458,6 +458,17 @@ const getStudentByEmail = async(req,res) => {
         return res.status(400).json({error : "something wrong error : "+error})
     }
 }
+
+const getTeacherByEmail = async(req,res) => {
+    const {email} = req.body;
+    try{
+        const teacher = await Teacher.findOne({email : email});
+            if(!teacher) return res.status(200).json({message : "there is no teacher by this email : "+email })
+            return res.status(200).json(teacher)
+    }catch(error){
+        return res.status(400).json({error : "something wrong error : "+error})
+    }
+}
 const getUser = async (req,res)=>{
     const {role , email} = req.params;
     try{

@@ -41,7 +41,7 @@
                                     <tr>
                                         <th>#</th>
                                         <th>Name</th>
-                                        <th>#</th>
+                                        <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -49,7 +49,7 @@
                                         <td>{{i}}</td>
                                         <td>{{category.name}}</td>
                                         <td>
-                                            <a [routerLink]="['/updatecategory',category.id]" class="btn btn-sm btn-warning">
+                                            <a [routerLink]="['/updatecategory',category._id]" class="btn btn-sm btn-warning">
                                                 <i class="fas fa-edit"></i>
                                             </a>
                                             <button (click)="delete(category)" class="btn btn-sm btn-danger">

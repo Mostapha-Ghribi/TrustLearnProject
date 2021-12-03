@@ -130,7 +130,7 @@ const getAllCourses = async (req,res) => {
         const courses = await Course.find({},{name:1,_id:0});
         var coursesNames = [];
         var result = [];
-        for await (course of courses){
+        for await (const course of courses){
             coursesNames.push(course.name);
         }
         for await (const CN of coursesNames) {

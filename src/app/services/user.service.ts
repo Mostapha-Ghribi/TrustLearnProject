@@ -15,6 +15,11 @@ export class UserService {
   private verifyEmail = "http://localhost:8000/api/user/verify-email";
   private forgetPassword = "http://localhost:8000/api/user/forget-password";
   private resetPassword = "http://localhost:8000/api/user/reset-password";
+  private getStudentsAPI = "http://localhost:8000/api/user/getAllStudents";
+  private getTeachersAPI = "http://localhost:8000/api/user/getAllTeachers";
+
+
+
   private allUsersUrl = "http://localhost:8080/users/all";
   private getOneUserUrl = "http://localhost:8080/users/one/";
   private updateUserUrl = "http://localhost:8080/users/update";
@@ -43,11 +48,15 @@ export class UserService {
     return dataFromAPI;
   }
 
-  public getAllUsers() {
-    let data = this.http.get<any>(this.allUsersUrl);
+  public getAllStudents() {
+    let data = this.http.get<any>(this.getStudentsAPI);
     return data;
   }
 
+  public getAllTeachers() {
+    let data = this.http.get<any>(this.getTeachersAPI);
+    return data;
+  }
   public getOneUser(id: any) {
     return this.http.get<any>(this.getOneUserUrl + id);
   }
