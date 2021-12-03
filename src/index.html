@@ -44,61 +44,45 @@
     <app-root></app-root>
 
     <!-- Vendor JS Files -->
+    <script
+src=”https://code.jquery.com/jquery-3.3.1.js"
+integrity=”sha256–2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=”
+crossorigin=”anonymous”>
+</script>
     <script src="./assets/vendor/aos/aos.js"></script>
     <script src="./assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="./assets/vendor/purecounter/purecounter.js"></script>
     <script src="./assets/vendor/swiper/swiper-bundle.min.js"></script>
 
     <!--Dashboard-->
+    
     <script src="./../assets/js/jquery.js"></script>
     <script src="./../assets/js/bootstrap.bundle.js"></script>
     <script src="./../assets/js/jquery.easing.js"></script>
     <script src="./../assets/js/sb-admin-2.js"></script>
 
     <!-- Template Main JS File -->
+    <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
     <script src="./assets/js/main.js"></script>
     <script type='text/javascript'>
+  $(".profile .icon_wrap").click(function(){
+  $(this).parent().toggleClass("active");
+  $(".notifications").removeClass("active");
+});
 
+$(".notifications .icon_wrap").click(function(){
+  $(this).parent().toggleClass("active");
+   $(".profile").removeClass("active");
+});
 
+$(".show_all .link").click(function(){
+  $(".notifications").removeClass("active");
+  $(".popup").show();
+});
 
-
-
-
-  
-        $(document).on('click','.arrow',function () {
-                var parent = $(this).closest('ul');
-                var child = parent.find("ul:first");
-      
-            var childd=child.closest("li")
-                
-            
-            var displaySetting =child.css("display");
-        
-      
-            
-                  if(displaySetting!="none")
-            {
-      
-            child.attr("style", "display:none");
-            childd.attr("style", "list-style-type: '+';");
-            
-            
-            
-              
-            }
-            else {
-            
-              
-            child.attr("style", "display:block");
-            childd.attr("style", "list-style-type: '-';");
-            
-            
-            
-          
-          
-            }
-          });
-      
+$(".close, .shadow").click(function(){
+  $(".popup").hide();
+});
       </script>
 </body>
 

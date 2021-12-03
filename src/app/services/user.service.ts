@@ -9,7 +9,7 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class UserService {
 
-
+  private getUserAPI = "http://localhost:8000/api/user/getUser/"
   private signUp = "http://localhost:8000/api/user/signup";
   private signIn = "http://localhost:8000/api/user/signin";
   private verifyEmail = "http://localhost:8000/api/user/verify-email";
@@ -29,6 +29,13 @@ export class UserService {
   public addUser(user: User) {
     let dataFromAPI = this.http.post<any>(this.signUp, user);
     return dataFromAPI;
+  }
+  public uploadImage(image: File){
+    const formData = new FormData();
+
+    formData.append('image', image);
+
+    return this.http.post('/api/v1/image-upload', formData);
   }
 
   public loginUser(user: User) {
@@ -51,6 +58,9 @@ export class UserService {
 
   public deleteUser(id: any) {
     return this.http.delete<any>(this.deleteUserUrl + id);
+  }
+  public getUser(role: any,email:any){
+    return this.http.get<any>(this.getUserAPI +email+'/'+role);
   }
 
   

@@ -7,7 +7,8 @@ export class User {
         public email?: String,
         public password?: String,
         public role?: String,
-        public accountState?: Boolean        
+        public file?: String,
+        public accountState?: Boolean
     ) {
     }
 

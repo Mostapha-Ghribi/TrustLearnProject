@@ -32,7 +32,7 @@ const ValidationSchema = Joi.object({
             const isPassCorrect = await bcrypt.compare(password,existingStudent.password);
                 if(!isPassCorrect) return res.status(400).json({message : "Invalid credentials"});
             const token = jwt.sign({ email: existingStudent.email, id:existingStudent._id},'test', {expiresIn: "1h"})
-            res.status(200).json({result : existingStudent,token});
+            res.status(200).json({result : existingStudent,role,token});
             break;
         case "teacher":
             const existingTeacher = await Teacher.findOne({email});
@@ -49,7 +49,7 @@ const ValidationSchema = Joi.object({
 }
 
  const signup = async (req,res) => {
-    const {email, password , firstname, lastname,role} = req.body;
+    const {email, password , firstname, lastname,role, file} = req.body;
     const {errorSignUp} = ValidationSchema.validate(req.body);
     try {
         if(errorSignUp){
@@ -74,6 +74,7 @@ const ValidationSchema = Joi.object({
                name: `${firstname} ${lastname}`,
                isVerified : false,
                emailToken : EmailTokenStudent,
+               avatar : file
            })
    
            const msgStudent = {
@@ -122,7 +123,7 @@ const ValidationSchema = Joi.object({
                 name: `${firstname} ${lastname}`,
                 isVerified : false,
                 emailToken : EmailToken,
-                phone
+                avatar : file
             })
     
             const msg = {
@@ -457,4 +458,20 @@ const getStudentByEmail = async(req,res) => {
         return res.status(400).json({error : "something wrong error : "+error})
     }
 }
-module.exports = {signin , signup , verifyEmail , resetPassword ,getStudentByEmail, forgetPassword, getAllStudents, getAllTeachers}
+const getUser = async (req,res)=>{
+    const {role , email} = req.params;
+    try{
+        switch(role){
+            case "student" : 
+                const student = await Student.findOne({email : email});
+                return res.status(200).json(student);
+            case "teacher":
+                const teacher = await Teacher.findOne({email : email});
+                return res.status(200).json(teacher);
+        }
+    }catch(error){
+        return res.status(200).json({error : "something went wrong error : "+error})
+    }
+}
+
+module.exports = {signin , signup , verifyEmail , resetPassword ,getStudentByEmail, forgetPassword, getAllStudents, getAllTeachers, getUser}

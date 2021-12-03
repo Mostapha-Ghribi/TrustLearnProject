@@ -40,7 +40,7 @@ export class LoginComponent implements OnInit {
 
     let isLoggedIn = this.userService.isLoggedIn() ;
     if (isLoggedIn){
-      this.router.navigate(['/dashboard'])
+      this.router.navigate(['/home'])
     }
 
   }
@@ -53,10 +53,12 @@ export class LoginComponent implements OnInit {
     this.userService.loginUser(user).subscribe(
       res => {
         let token = res.token ;
-        let username=res.result.name;
-        let v=localStorage.setItem("username",username)
+        let email = res.result.email;
+        let role = res.role;
+        localStorage.setItem("email",email)
         localStorage.setItem("token", token)
-        this.router.navigateByUrl('/dashboard')
+        localStorage.setItem("role",role)
+        this.router.navigateByUrl('/home')
 
       },
       err => console.log(err)
