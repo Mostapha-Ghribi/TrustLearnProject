@@ -17,6 +17,7 @@ export class NavbarComponent implements OnInit {
  
 
   isLoggedIn!: Boolean ;
+  isverified!: Boolean ;
   role:String | null | undefined;
   email:String | undefined | null;
   user: any;
@@ -45,14 +46,16 @@ $(".close, .shadow").on('click',function(){
   $(".popup").hide();
 });
 
+    this.isverified = this.userService.isverified() ;
     this.isLoggedIn = this.userService.isLoggedIn() ;
     let email = localStorage.getItem("email") 
     let role = localStorage.getItem("role")
+    
 
     this.userService.getUser(role,email).subscribe(
       result=>{
         this.user = result
-        console.log(this.user);
+        console.log(this.isverified);
       },
       error=>{
         console.log(error);

@@ -1,31 +1,34 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CourseService } from 'src/app/services/course.service';
 import { Course } from 'src/app/models/course';
 import { SpinnerService } from 'src/app/spinner.service';
 import { CategoryService } from 'src/app/services/category.service';
 
 @Component({
-  selector: 'app-courses',
-  templateUrl: './courses.component.html',
-  styleUrls: ['./courses.component.css']
+  selector: 'app-courses-by-category',
+  templateUrl: './courses-by-category.component.html',
+  styleUrls: ['./courses-by-category.component.css']
 })
-export class CoursesComponent implements OnInit {
+export class CoursesByCategoryComponent implements OnInit {
 
-  
-  constructor(private courseService: CourseService, private spinner:SpinnerService,private categoryService: CategoryService, private service: SpinnerService) { }
+  constructor(private courseService: CourseService,private route: ActivatedRoute,private service: SpinnerService,private categoryService: CategoryService) { }
   courselist! :Course [];
   public categories: any[] = [];
-  
   ngOnInit(): void {
-  this.courseService.getAllcourses().subscribe(
-      result=>{
-        this.courselist = result
-        console.log(this.courselist);
+    let idc = this.route.snapshot.params.id;
+
+    this.courseService.getCoursesByCategory(idc).subscribe(
+      res=>{
+        this.courselist=res;
+        console.log(res);
+
       },
-      error=>{
-        console.log(error);
+      err=>{
+        console.log(err);
       }
-    );
+    )
+
     this.service.requestStarted();
     this.categoryService.getCategories().subscribe(
       res => {
@@ -40,4 +43,5 @@ export class CoursesComponent implements OnInit {
       }
     )
   }
+
 }

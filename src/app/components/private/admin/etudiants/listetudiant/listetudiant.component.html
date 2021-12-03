@@ -36,20 +36,18 @@
                                 <thead>
                                     <tr>
                                         <th>Profile Image</th>
-                                        <th>First Name</th>
-                                        <th>Last Name</th>
+                                        <th>Name</th>
                                         <th>Email</th>
                                         <th>Account state</th>
                                         <th>Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr let student *ngFor="let student of StudentList" >
+                                    <tr  *ngFor="let student of StudentList" >
 
-                                        <td><img src="" width="100" height="100"> </td>
-                                        <td class="align-middle"></td>
-                                        <td class="align-middle">Ben Ammar</td>
-                                        <td class="align-middle">ahmedbenammar44@gmail.com</td>
+                                        <td><img src="{{student.avatar}}" width="100" height="100"> </td>
+                                        <td class="align-middle">{{student.name}}</td>
+                                        <td class="align-middle">{{student.email}}</td>
                                         <td class="align-middle">
                                             <div class="badge badge-pill badge-success">Active</div>
                                         </td>

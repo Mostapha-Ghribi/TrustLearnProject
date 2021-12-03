@@ -9,7 +9,7 @@ import { User } from 'src/app/models/user';
   styleUrls: ['./listetudiant.component.css']
 })
 export class ListetudiantComponent implements OnInit {
-  StudentList = [];
+  StudentList:any;
   constructor(private userService:UserService,private toastr: ToastrService) { }
 
   ngOnInit(): void {

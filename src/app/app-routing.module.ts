@@ -10,6 +10,7 @@ import { RegisterComponent } from './components/public/register/register.compone
 import { AboutComponent } from './components/public/about/about.component';
 import { ContactComponent } from './components/public/contact/contact.component';
 import { CoursesComponent } from './components/public/courses/courses.component';
+import { CoursesByCategoryComponent } from './components/public/courses-by-category/courses-by-category.component';
 import { StudentcoursesComponent } from './components/public/studentcourses/studentcourses.component';
 import { CoursedetailComponent } from './components/public/coursedetail/coursedetail.component';
 import { TrainersComponent } from './components/public/trainers/trainers.component';
@@ -53,6 +54,10 @@ const routes: Routes = [
   {
     path: 'courses',
     component: CoursesComponent
+  },
+  {
+    path: 'categorie/:id',
+    component: CoursesByCategoryComponent,
   },
   {
     path: 'mycourses',

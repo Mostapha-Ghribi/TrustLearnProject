@@ -36,6 +36,7 @@ import {MatButtonModule} from '@angular/material/button';
 import { StudentcoursesComponent } from './components/public/studentcourses/studentcourses.component';
 import {MatSelectModule} from '@angular/material/select';
 import { SpinnerComponent } from './spinner/spinner.component';
+import { CoursesByCategoryComponent } from './components/public/courses-by-category/courses-by-category.component';
 
 
 
@@ -69,7 +70,8 @@ import { SpinnerComponent } from './spinner/spinner.component';
     UpdateformationComponent,
     ListformationComponent,
     StudentcoursesComponent,
-    SpinnerComponent
+    SpinnerComponent,
+    CoursesByCategoryComponent
   ],
   imports: [
     BrowserModule,

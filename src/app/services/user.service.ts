@@ -72,6 +72,21 @@ export class UserService {
     return this.http.get<any>(this.getUserAPI +email+'/'+role);
   }
 
+
+  isverified(){
+
+    
+      let verified = localStorage.getItem("verified");
+  
+      if (verified=="true") {
+        return true;
+      } else {
+        return false;
+      }
+  
+
+
+  }
   
   isLoggedIn() {
     let token = localStorage.getItem("token");
