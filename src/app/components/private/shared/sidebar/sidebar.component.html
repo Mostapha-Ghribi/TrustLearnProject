@@ -22,22 +22,22 @@
     <hr class="sidebar-divider">
     <!-- Admin items -->
 
-    <li *ngIf="isAdmin" class="nav-item">
+    <li  class="nav-item">
         <a class="nav-link" [routerLink]="['/listcategory']">
             <i class="fab fa-elementor"></i>
             <span>Categories Management</span></a>
     </li>
-    <li *ngIf="isAdmin" class="nav-item">
+    <li  class="nav-item">
         <a class="nav-link" [routerLink]="['/listformation']">
             <i class="fab fa-product-hunt"></i>
             <span>Courses Management</span></a>
     </li>
-    <li *ngIf="isAdmin" class="nav-item">
+    <li  class="nav-item">
         <a class="nav-link" [routerLink]="['/listformateur']">
             <i class="fas fa-fw fa-users"></i>
             <span>Trainers Management</span></a>
     </li>
-    <li *ngIf="isAdmin" class="nav-item">
+    <li  class="nav-item">
         <a class="nav-link" [routerLink]="['/listetudiant']">
             <i class="fas fa-fw fa-tasks"></i>
             <span>Students Management</span></a>

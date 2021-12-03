@@ -79,38 +79,38 @@ const routes: Routes = [
   {
     path: 'listcategory',
     component: ListcategoryComponent,
-    canActivate: [AdminGuard]
+   
   },
   {
     path: 'listformation',
     component: ListformationComponent,
-    canActivate: [AdminGuard]
+    
   },
   {
     path: 'listformateur',
     component: ListformateursComponent,
-    canActivate: [AdminGuard]
+    
 
   },
   {
     path: 'listetudiant',
     component: ListetudiantComponent,
-    canActivate: [AdminGuard]
+    
   },
   {
     path: 'addcategory',
     component: AddcategoryComponent,
-    canActivate: [AdminGuard]
+    
   },
   {
     path: 'updatecategory/:id',
     component: UpdatecategoryComponent,
-    canActivate: [AdminGuard]
+    
   },
   {
     path: 'updateformation/:id',
     component: UpdateformationComponent,
-    canActivate: [AdminGuard],
+   
   },
   {
     path: '**',

@@ -67,17 +67,6 @@
                                             <small *ngIf="image?.errors?.required" class="text-danger">image is required<br></small>
                                         </div>
                                     </div>
-                                    <div class="form-group">
-                                        <label for="category" id="price">Category : </label>
-                                        <select formControlName="category" class="custom-select">
-                                            
-       <option value="" selected>Choose category</option>
-       <option *ngFor="let category of categories" value="{{category.id}}">{{ category.name }}</option>
-     </select>
-                                        <div *ngIf="category?.touched && category?.invalid">
-                                            <small *ngIf="category?.errors?.required" class="text-danger">category is required<br></small>
-                                        </div>
-                                    </div>
                                     <button type="submit" [disabled]="updateForm.invalid" class="btn btn-sm btn-warning mt-3">Update</button>
                                 </div>
                             </form>

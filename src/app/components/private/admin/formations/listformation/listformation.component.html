@@ -50,14 +50,14 @@
                                 <tbody>
                                     <tr *ngFor="let course of courses ; let i = index">
                                         <td class="align-middle">1</td>
-                                        <td><img src="{{ course.imageUrl }}" width="150" height="100">
+                                        <td><img src="{{course.image}}" width="150" height="100">
                                         </td>
                                         <td class="align-middle">{{ course.name }}</td>
                                         <td class="align-middle">{{ course.description }}</td>
                                         <td class="align-middle">{{ course.price }}DT</td>
-                                        <td class="align-middle">{{course.category.name}}</td>
+                                        <td class="align-middle"></td>
                                         <td class="align-middle">
-                                            <a [routerLink]="['/updateformation', course.id]" class="btn btn-sm btn-warning">
+                                            <a [routerLink]="['/updateformation', course.name]" class="btn btn-sm btn-warning">
                                                 <i class="fas fa-edit"></i>
                                             </a>
                                             <button (click)="delete(course)" class="btn btn-sm btn-danger">

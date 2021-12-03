@@ -55,11 +55,11 @@
       <div class="get_started">
         <a [routerLink]="['/login']" *ngIf="!isLoggedIn" class="get-started-btn">Get Started</a>
       </div>
-      <div class="profile">
+      <div class="profile"  >
         <div  class="icon_wrap">
-          <img  src="{{user.avatar}}" alt="profile_pic">
+          <img  *ngIf="isLoggedIn" src="{{user.avatar}}" alt="profile_pic">
           <span class="name">{{user.name}}</span>
-          <i class="fas fa-chevron-down"></i>
+          <i *ngIf="isLoggedIn" class="fas fa-chevron-down"></i>
         </div>
 
         <div class="profile_dd">
@@ -67,12 +67,13 @@
             <li class="verify">
               <a class="profile" href="#"><span class="picon"><i class="fa fa-exclamation-triangle"></i>
               </span>Verify Your Email To Enroll in Courses</a>
+              
             </li>
             <li class="profile_li"><a class="profile" href="#"><span class="picon"><i class="fas fa-user-alt"></i>
                 </span>Profile</a>
             </li>
-            <li><a class="settings" href="#"><span class="picon"><i class="fas fa-cog"></i></span>Settings</a></li>
-            <li><a class="logout" *ngIf="isLoggedIn"(click)="logout()"><span class="picon"><i class="fas fa-sign-out-alt"></i></span>Logout</a></li>
+            <li><a class="logout" *ngIf="isLoggedIn" (click)="logout()"><span class="picon"><i class="fas fa-sign-out-alt"></i></span>Logout</a></li>
+            <li><a class="settings" href="#"><span class="picon"><i class="fas fa-cog"></i></span>Settings</a></li>    
           </ul>
         </div>
       </div>

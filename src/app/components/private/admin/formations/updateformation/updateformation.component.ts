@@ -43,9 +43,7 @@ export class UpdateformationComponent implements OnInit {
       image: new FormControl('', [
         Validators.required
       ]),
-      category: new FormControl('', [
-        Validators.required
-      ])
+     
     }
 
     this.updateForm = this.fb.group(formControls);
@@ -56,7 +54,7 @@ export class UpdateformationComponent implements OnInit {
   get description() { return this.updateForm.get('description'); }
   get price() { return this.updateForm.get('price'); }
   get image() { return this.updateForm.get('image'); }
-  get category() { return this.updateForm.get('category'); }
+
 
   ngOnInit(): void {
 
@@ -66,12 +64,12 @@ export class UpdateformationComponent implements OnInit {
     this.courseService.getOneCourse(idCourse).subscribe(
       res => {
         let course = res;
-
+        console.log(idCourse);
         this.updateForm.patchValue({
           name: course.name,
           description: course.description,
           price: course.price,
-          category: course.category.id
+          
         })
 
       },
@@ -81,22 +79,14 @@ export class UpdateformationComponent implements OnInit {
       }
     )
 
-    this.categoryService.allCategories().subscribe(
-      res => {
-        this.categories = res;
-      },
-      err => {
-        console.log(err);
-
-      }
-    )
+   
 
   }
 
   update() {
     let data = this.updateForm.value;
     let idCourse = this.route.snapshot.params.id;
-    let product = new Course(idCourse, data.name, data.description, data.image, data.price, new Category(data.category));
+    let product = new Course(idCourse, data.name, data.description, data.image, data.price);
 
     this.courseService.updateCourse(product).subscribe(
       res => {
