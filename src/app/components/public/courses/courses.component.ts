@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CourseService } from 'src/app/services/course.service';
 import { Course } from 'src/app/models/course';
+import { SpinnerService } from 'src/app/spinner.service';
 
 @Component({
   selector: 'app-courses',
@@ -10,7 +11,7 @@ import { Course } from 'src/app/models/course';
 export class CoursesComponent implements OnInit {
 
   
-  constructor(private courseService: CourseService) { }
+  constructor(private courseService: CourseService, private spinner:SpinnerService) { }
   courselist! :Course [];
   ngOnInit(): void {
   this.courseService.getAllcourses().subscribe(

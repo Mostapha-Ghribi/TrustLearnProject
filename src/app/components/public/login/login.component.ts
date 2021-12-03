@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms'
 import { Router } from '@angular/router';
 import { User } from 'src/app/models/user';
 import { UserService } from 'src/app/services/user.service';
+import { SpinnerService } from 'src/app/spinner.service';
 
 @Component({
   selector: 'app-login',
@@ -13,7 +14,7 @@ export class LoginComponent implements OnInit {
 
   loginForm : FormGroup
 
-  constructor(private fb: FormBuilder, private userService: UserService, private router: Router) { 
+  constructor(private fb: FormBuilder, private userService: UserService, private router: Router, private spinner:SpinnerService) { 
     let formControls = {
       email: new FormControl('', [
         Validators.required,
@@ -46,12 +47,14 @@ export class LoginComponent implements OnInit {
   }
 
   login(){
+    this.spinner.requestStarted();
   let data = this.loginForm.value;
     let user = new User(undefined, undefined, undefined, data.email, data.password, data.role)
 
 
     this.userService.loginUser(user).subscribe(
       res => {
+        this.spinner.requestEnded();
         let token = res.token ;
         let email = res.result.email;
         let role = res.role;
@@ -61,7 +64,10 @@ export class LoginComponent implements OnInit {
         this.router.navigateByUrl('/home')
 
       },
-      err => console.log(err)
+      err => {
+        this.spinner.resetSpinner();
+        console.log(err)
+      }
     )
   }
 
