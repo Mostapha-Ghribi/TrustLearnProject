@@ -4,6 +4,8 @@ import { CourseService } from 'src/app/services/course.service';
 import { Course } from 'src/app/models/course';
 import { DomSanitizer } from '@angular/platform-browser';
 import { SpinnerService } from 'src/app/spinner.service';
+import { UserService } from 'src/app/services/user.service';
+
 
 
 @Component({
@@ -13,13 +15,14 @@ import { SpinnerService } from 'src/app/spinner.service';
 })
 export class CoursedetailComponent implements OnInit {
   
-  constructor(private courseService: CourseService,private route: ActivatedRoute, private spinner:SpinnerService) { }
+  constructor(private courseService: CourseService,private route: ActivatedRoute, private spinner:SpinnerService,private router: Router,private userService: UserService) { }
  id:any;
- course! :Course ;
+ course:any;
  image! :Course;
+ isverified!: Boolean ;
  
   ngOnInit(): void {
-
+    this.isverified = this.userService.isverified() ;
     let idc = this.route.snapshot.params.id;
 
     this.courseService.getOneCourse(idc).subscribe(
@@ -36,6 +39,16 @@ export class CoursedetailComponent implements OnInit {
   
   }
 
+  getcourse(){
 
+    if(this.course.price==0){
+      this.router.navigate(['/mycourses']);
+    } else {
+      this.router.navigate(['/home']);
+    }
+
+
+
+}
 
 }

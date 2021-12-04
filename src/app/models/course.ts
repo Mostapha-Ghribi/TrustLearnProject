@@ -9,7 +9,7 @@ export class Course {
         public description?: String,
         public teacher?: String,
         public category?: Category,
-        public image?: String
+        public image?: String,
     ) {
     }
 }

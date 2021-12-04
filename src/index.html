@@ -86,6 +86,39 @@ $(".close, .shadow").click(function(){
 });
 
 
+$(document).on('click','.arrow',function () {
+		  var parent = $(this).closest('ul');
+		  var child = parent.find("ul:first");
+
+      var childd=child.closest("li")
+          
+      
+      var displaySetting =child.css("display");
+  
+
+      
+			if(displaySetting!="none")
+	  {
+
+      child.attr("style", "display:none");
+      childd.attr("style", "list-style-type: '+';");
+      
+      
+      
+		
+	  }
+	  else {
+      
+		
+      child.attr("style", "display:block");
+      childd.attr("style", "list-style-type: '-';");
+      
+      
+      
+	
+	
+	  }
+	});
 
       </script>
 </body>

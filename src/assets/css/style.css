@@ -619,6 +619,15 @@ section {
     color: #777777;
 }
 
+.level-god{
+    font-size: 14px;
+    background: #5fcf80;
+    padding: 7px 14px;
+    color: #fff;
+    margin: 0;
+    border-radius: 4px;
+}
+
 .courses .course-content h4 {
     font-size: 14px;
     background: #5fcf80;
