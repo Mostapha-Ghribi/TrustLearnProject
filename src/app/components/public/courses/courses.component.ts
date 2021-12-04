@@ -13,7 +13,7 @@ export class CoursesComponent implements OnInit {
 
   
   constructor(private courseService: CourseService, private spinner:SpinnerService,private categoryService: CategoryService, private service: SpinnerService) { }
-  courselist! :Course [];
+  public courselist! :Course [];
   public categories: any[] = [];
   
   ngOnInit(): void {

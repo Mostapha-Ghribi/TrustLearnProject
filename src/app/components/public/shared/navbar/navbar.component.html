@@ -22,16 +22,16 @@
           <a routerLinkActive="active" [routerLink]="['/aboutus']"><span class="name">About</span></a>
         </div>
       </div>
-      <div class="header_items">
+      <div *ngIf="isLoggedIn" class="header_items">
         <div class="icon_wrap">
           <i class="fa fa-book"></i>
-          <a routerLinkActive="active" [routerLink]="['/courses']"><span class="name">Courses</span></a>
+          <a routerLinkActive="active"  [routerLink]="['/courses']"><span class="name">Courses</span></a>
         </div>
       </div>
-      <div class="header_items">
+      <div *ngIf="isLoggedIn" class="header_items">
         <div class="icon_wrap">
           <i class="fas fa-user"></i>
-          <a routerLinkActive="active" [routerLink]="['/trainers']"><span class="name">Trainers</span></a>
+          <a routerLinkActive="active"  [routerLink]="['/trainers']"><span class="name">Trainers</span></a>
         </div>
       </div>
       <div class="header_items">
@@ -49,7 +49,7 @@
       <div *ngIf="isLoggedIn" class="header_items">
         <div class="icon_wrap">
           <i class="fas fa-book"></i>
-          <a routerLinkActive="active" [routerLink]="['/mycourses']"><span class="name">My Courses</span></a>
+          <a routerLinkActive="active"  [routerLink]="['/mycourses']"><span class="name">My Courses</span></a>
         </div>
       </div>
       <div class="get_started">

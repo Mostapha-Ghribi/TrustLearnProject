@@ -48,6 +48,12 @@ export class UserService {
     return dataFromAPI;
   }
 
+  public forgetPass(user: User) {
+    console.log(user);
+    let dataFromAPI = this.http.post<any>(this.forgetPassword, user);
+    return dataFromAPI;
+  }
+
   public getAllStudents() {
     let data = this.http.get<any>(this.getStudentsAPI);
     return data;

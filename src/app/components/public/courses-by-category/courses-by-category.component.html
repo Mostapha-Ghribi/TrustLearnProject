@@ -18,6 +18,9 @@
             <mat-form-field appearance="fill">
               <mat-label>Categories</mat-label>
               <mat-select>
+                <mat-option >
+                    <a [routerLink]="['/courses']">All Courses</a>
+                </mat-option>
                 <mat-option *ngFor="let category of categories">
                     <a [routerLink]="['/categorie',category.name]">{{category.name}}</a>
                 </mat-option>
@@ -31,56 +34,8 @@
 
                 <div class="row" data-aos="zoom-in" data-aos-delay="100">
 
-                    <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
-                        <div class="course-item">
-                            <a [routerLink]="['/coursedetail']"><img src="assets/img/course-1.jpg" class="img-fluid" alt="..."></a>
-                            <div class="course-content">
-                                <div class="d-flex justify-content-between align-items-center mb-3">
-                                    <h4>Web Development</h4>
-                                    <p class="price">$169</p>
-                                </div>
-
-                                <h3><a [routerLink]="['/coursedetail']">Website Design</a></h3>
-                                <p>Et architecto provident deleniti facere repellat nobis iste. Id facere quia quae dolores dolorem tempore.</p>
-                                <div class="trainer d-flex justify-content-between align-items-center">
-                                    <div class="trainer-profile d-flex align-items-center">
-                                        <img src="assets/img/trainers/trainer-1.jpg" class="img-fluid" alt="">
-                                        <span>Antonio</span>
-                                    </div>
-                                    <div class="trainer-rank d-flex align-items-center">
-                                        <i class="bx bx-user"></i>&nbsp;50 &nbsp;&nbsp;
-                                        <i class="bx bx-heart"></i>&nbsp;65
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                     <!-- End Course Item-->
 
-                    <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-md-0">
-                        <div class="course-item">
-                            <img src="assets/img/course-2.jpg" class="img-fluid" alt="...">
-                            <div class="course-content">
-                                <div class="d-flex justify-content-between align-items-center mb-3">
-                                    <h4>Marketing</h4>
-                                    <p class="price">$250</p>
-                                </div>
-
-                                <h3><a href="course-details.html">Search Engine Optimization</a></h3>
-                                <p>Et architecto provident deleniti facere repellat nobis iste. Id facere quia quae dolores dolorem tempore.</p>
-                                <div class="trainer d-flex justify-content-between align-items-center">
-                                    <div class="trainer-profile d-flex align-items-center">
-                                        <img src="assets/img/trainers/trainer-2.jpg" class="img-fluid" alt="">
-                                        <span>Lana</span>
-                                    </div>
-                                    <div class="trainer-rank d-flex align-items-center">
-                                        <i class="bx bx-user"></i>&nbsp;35 &nbsp;&nbsp;
-                                        <i class="bx bx-heart"></i>&nbsp;42
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                     <!-- End Course Item-->
 
                     <div *ngFor="let course of courselist" class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-lg-0">
