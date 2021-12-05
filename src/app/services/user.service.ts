@@ -17,6 +17,7 @@ export class UserService {
   private resetPassword = "http://localhost:8000/api/user/reset-password";
   private getStudentsAPI = "http://localhost:8000/api/user/getAllStudents";
   private getTeachersAPI = "http://localhost:8000/api/user/getAllTeachers";
+  private enrollInCourseAPI = "http://localhost:8000/api/user/enrollInCourse";
 
 
 
@@ -43,6 +44,10 @@ export class UserService {
     return this.http.post('/api/v1/image-upload', formData);
   }
 
+  public enrollInCourse(user : User){
+    let dataFromAPI = this.http.put<any>(this.enrollInCourseAPI,user)
+    return dataFromAPI;
+  }
   public loginUser(user: User) {
     let dataFromAPI = this.http.post<any>(this.signIn, user);
     return dataFromAPI;
