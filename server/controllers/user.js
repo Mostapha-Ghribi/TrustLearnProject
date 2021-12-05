@@ -2,6 +2,7 @@ const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 const {Student, Teacher} = require('../models/model.js')
 const crypto = require('crypto')
+const {getCourseByNamewithParam} = require('./course.js')
 const _ = require('lodash')
 const sgMail = require('@sendgrid/mail')
 const {Verify, Verified} = require('../html_template_mail/verify.js')
@@ -312,7 +313,7 @@ const ValidationSchema = Joi.object({
             console.log("success Email Sent !!");
             let firstTwoLetters = email.substring(0,2)+"***";
             let emailRes = firstTwoLetters+email.substring(email.indexOf("@"), );
-             res.json({message : "We've sent an email to "+emailRes+". Click the link in the email to reset your password. If you don't see the email, check other places it might be, like your junk, spam, social, or other folders."})
+             res.json({resetLink : tokenStudent,role : "student",message : "We've sent an email to "+emailRes+". Click the link in the email to reset your password. If you don't see the email, check other places it might be, like your junk, spam, social, or other folders."})
             }catch(err){
                 console.log("error msg",err);
             }
@@ -357,12 +358,16 @@ const ValidationSchema = Joi.object({
 }
 
  const resetPassword = (req,res) =>{
+    try{
+
     const {resetLink,role} = req.params;
-    const {newPassword}=req.body;
+    const {password}=req.body;
     if(resetLink){
+        const newPassword = password;
+        
         jwt.verify(resetLink,"test123",function(error,decodedData){
             if(error){
-                return res.status(401).json({
+                return res.status(400).json({
                     error : "Incorrect token or it is expired"
                 })
             } 
@@ -370,13 +375,15 @@ const ValidationSchema = Joi.object({
                 case "student" :
                     Student.findOne({resetLink},async (err,student)=>{
                         if(err || !student){
-                            return res.status(401).json({
-                                error : "Student with this token does not exits"
+                            return res.status(400).json({
+                                error : "User with this token does not exits"
                             })
                         }
                         const hashedPasswordStudent = await bcrypt.hash(newPassword, 12);
                         const obj = {
-                            password : hashedPasswordStudent
+                            password : hashedPasswordStudent,
+                            resetLink : ""
+
                         }
                         student = _.extend(student, obj);
                         student.save((err,result) => {
@@ -385,8 +392,9 @@ const ValidationSchema = Joi.object({
                                     error : "something wrong"
                                 })
                             }else{
+                                
                                 return res.status(200).json({
-                                    message : "your password has been changed (student)"
+                                    message : "your password has been changed click the button below to redirect to the login page"
                                 })
                             }
                         })
@@ -425,6 +433,9 @@ const ValidationSchema = Joi.object({
             error : "Auth error !!"
         })
     }
+}catch(error){
+    return res.status(400).json({error : "somethin wrong error : "+error})
+}
 }
 
 const getAllStudents = async(req,res) =>{
@@ -503,5 +514,23 @@ const enrollInCourse = async (req,res)=>{
     }
 }
 
+const getCoursesFromStudent = async (req,res)=>{
+    const {email} = req.body;
+    try{
+        var result = [];
+        const student = await Student.findOne(email);
+        console.log(student)
+        const coursesEnrolled = student.enrolledCourses_id;
+        for await (const course of coursesEnrolled) {
+            const C = await getCourseByNamewithParam(course)
+            result.push(C)
+          }
+        return res.json(result);
 
-module.exports = {signin , signup , verifyEmail , enrollInCourse, resetPassword ,getStudentByEmail, forgetPassword, getAllStudents, getAllTeachers, getUser}
+    }catch(error){
+        return res.status(400).json({error : "something wrong error : "+error})
+    }
+}
+
+
+module.exports = {getCoursesFromStudent, signin , signup , verifyEmail , enrollInCourse, resetPassword ,getStudentByEmail, forgetPassword, getAllStudents, getAllTeachers, getUser}

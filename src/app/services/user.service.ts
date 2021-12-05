@@ -18,6 +18,7 @@ export class UserService {
   private getStudentsAPI = "http://localhost:8000/api/user/getAllStudents";
   private getTeachersAPI = "http://localhost:8000/api/user/getAllTeachers";
   private enrollInCourseAPI = "http://localhost:8000/api/user/enrollInCourse";
+  private getCoursesEnrolledAPI = "http://localhost:8000/api/user/enrolledCourses";
 
 
 
@@ -26,10 +27,12 @@ export class UserService {
   private updateUserUrl = "http://localhost:8080/users/update";
   private deleteUserUrl = "http://localhost:8080/users/delete/";
 
-  
-
+  public resetLink = "";
+  public role = "";
 
   constructor(private http: HttpClient) { }
+
+
 
 
   public addUser(user: User) {
@@ -49,20 +52,24 @@ export class UserService {
     let dataFromAPI = this.http.put<any>(this.enrollInCourseAPI,email,name)
     return dataFromAPI;
   }
+  public getCoursesEnrolled(email : any){
+    console.log(email)
+    let dataFromAPI = this.http.get<any>(this.getCoursesEnrolledAPI,email)
+    return dataFromAPI;
+  }
   public loginUser(user: User) {
     let dataFromAPI = this.http.post<any>(this.signIn, user);
     return dataFromAPI;
   }
 
   public forgetPass(user: User) {
-    console.log(user);
     let dataFromAPI = this.http.put<any>(this.forgetPassword, user);
+    console.log(dataFromAPI)
     return dataFromAPI;
   }
 
-  public resetPass(newPassword: any) {
-    console.log(newPassword);
-    let dataFromAPI = this.http.put<any>(this.resetPassword, newPassword);
+  public resetPass(user: any, resetLink:any,role : any) {
+    let dataFromAPI = this.http.put<any>(this.resetPassword+'/'+resetLink+'/'+role, user);
     return dataFromAPI;
   }
 

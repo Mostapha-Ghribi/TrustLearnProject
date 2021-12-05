@@ -59,6 +59,9 @@ ShowErr(message: string) {
       res => {
         this.spinner.requestEnded();
         this.ShowSucc(res.message);
+        localStorage.setItem('resetLink' ,res.resetLink)
+        localStorage.setItem('roleUser' ,res.role)
+
        // this.toastr.success("reset Password sent to your email");
         console.log(res);
 

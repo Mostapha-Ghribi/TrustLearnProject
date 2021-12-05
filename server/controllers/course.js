@@ -201,4 +201,4 @@ const getCourseByNamewithParam = async (name) =>{
 }
 //!----------------------------------------------------------------------------------------
 
-module.exports = {createCourse, deleteCourse, updateCourse, getCourse, getAllCourses, getAllCoursesByCategory, getAllCoursesByTeacher, getCoursesByCategoryIntoArray}
+module.exports = {getCourseByNamewithParam, createCourse, deleteCourse, updateCourse, getCourse, getAllCourses, getAllCoursesByCategory, getAllCoursesByTeacher, getCoursesByCategoryIntoArray}
