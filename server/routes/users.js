@@ -1,6 +1,6 @@
 const express = require('express');
 
-const { signin, signup, verifyEmail, forgetPassword, getUser, resetPassword,getStudentByEmail, getAllStudents, getAllTeachers} = require('../controllers/user.js');
+const { signin, signup, verifyEmail, enrollInCourse, forgetPassword, getUser, resetPassword,getStudentByEmail, getAllStudents, getAllTeachers} = require('../controllers/user.js');
 const router = express.Router();
 
 router.post('/signin' , signin);
@@ -12,5 +12,6 @@ router.get('/getAllStudents',getAllStudents);
 router.get('/getUser/:email/:role',getUser);
 router.get('/getAllTeachers',getAllTeachers);
 router.get('/getStudentByEmail',getStudentByEmail);
+router.put('/enrollInCourse',enrollInCourse);
 
 module.exports = router;

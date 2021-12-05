@@ -22,20 +22,7 @@ export class CoursedetailComponent implements OnInit {
  isverified!: Boolean ;
  
   ngOnInit(): void {
-    this.isverified = this.userService.isverified() ;
-    let idc = this.route.snapshot.params.id;
-
-    this.courseService.getOneCourse(idc).subscribe(
-      res=>{
-        this.course=res;
-        console.log(res);
-
-      },
-      err=>{
-        console.log(err);
-      }
-    )
-
+   this.init()
   
   }
 
@@ -48,6 +35,23 @@ export class CoursedetailComponent implements OnInit {
     }
 
 
+
+}
+init(){
+  this.isverified = this.userService.isverified() ;
+  let idc = this.route.snapshot.params.id;
+  this.spinner.requestStarted()
+  this.courseService.getOneCourse(idc).subscribe(
+    res=>{
+      this.course=res;
+      this.spinner.requestEnded()
+
+    },
+    err=>{
+      this.spinner.resetSpinner()
+      console.log(err);
+    }
+  )
 
 }
 

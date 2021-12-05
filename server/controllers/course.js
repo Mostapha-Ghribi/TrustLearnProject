@@ -148,7 +148,7 @@ const getAllCourses = async (req,res) => {
 //!-------------------------------------------------------------------------------------
 //* Get All Courses (With Category)
 const getAllCoursesByCategory = async (req,res) =>{
-    const {name} = req.body;
+    const {name} = req.params;
     try{
         const category = await Category.findOne({name : name});
         if(!category) return res.status(200).json({message : "idk"})

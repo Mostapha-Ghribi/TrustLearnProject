@@ -17,14 +17,17 @@ export class CoursesByCategoryComponent implements OnInit {
   public categories: any[] = [];
   ngOnInit(): void {
     let idc = this.route.snapshot.params.id;
-
+    this.service.requestStarted()
     this.courseService.getCoursesByCategory(idc).subscribe(
       res=>{
+        
         this.courselist=res;
+        this.service.requestEnded()
         console.log(res);
 
       },
       err=>{
+        this.service.resetSpinner()
         console.log(err);
       }
     )

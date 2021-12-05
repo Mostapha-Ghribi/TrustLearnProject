@@ -17,12 +17,18 @@ export class CoursesComponent implements OnInit {
   public categories: any[] = [];
   
   ngOnInit(): void {
-  this.courseService.getAllcourses().subscribe(
+  this.init()
+  }
+  init() {
+    this.service.requestStarted()
+    this.courseService.getAllcourses().subscribe(
       result=>{
         this.courselist = result
+        this.service.requestEnded()
         console.log(this.courselist);
       },
       error=>{
+        this.service.resetSpinner()
         console.log(error);
       }
     );
@@ -39,5 +45,6 @@ export class CoursesComponent implements OnInit {
 
       }
     )
-  }
 }
+}
+

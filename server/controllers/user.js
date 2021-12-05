@@ -486,5 +486,21 @@ const getUser = async (req,res)=>{
         return res.status(200).json({error : "something went wrong error : "+error})
     }
 }
+const enrollInCourse = async (req,res)=>{
+    const{email,name} = req.body;
+    try{
+            const resultUpdate = await Student.findOneAndUpdate(
+                {email : email},
+                { $push: { enrolledCourses_id: name } }
+            )
+            if(!resultUpdate) return res.status(400).json({error : "something wrong error : "+error})
+            return res.status(200).json({message : "added successfully"})
+        
 
-module.exports = {signin , signup , verifyEmail , resetPassword ,getStudentByEmail, forgetPassword, getAllStudents, getAllTeachers, getUser}
+    }catch(error){
+        return res.status(400).json({error : "something wrong error : "+error})
+    }
+}
+
+
+module.exports = {signin , signup , verifyEmail , enrollInCourse, resetPassword ,getStudentByEmail, forgetPassword, getAllStudents, getAllTeachers, getUser}
