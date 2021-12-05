@@ -301,7 +301,7 @@ const ValidationSchema = Joi.object({
         text : `
         Hello ! Please click on given link to reset your password.
         `,
-        html: ResetPassword(req.headers.host,tokenStudent,"student")
+        html: ResetPassword("http://localhost:4200",tokenStudent,"student")
     }
     return Student.updateOne({resetLink : tokenStudent}, function (err,success){
         if(err){
@@ -357,14 +357,15 @@ const ValidationSchema = Joi.object({
 }
 
  const resetPassword = (req,res) =>{
-    const {resetLink, newPassword,role} = req.body;
+    const {resetLink,role} = req.params;
+    const {newPassword}=req.body;
     if(resetLink){
         jwt.verify(resetLink,"test123",function(error,decodedData){
             if(error){
                 return res.status(401).json({
                     error : "Incorrect token or it is expired"
                 })
-            }
+            } 
             switch(role){
                 case "student" :
                     Student.findOne({resetLink},async (err,student)=>{
@@ -493,7 +494,7 @@ const enrollInCourse = async (req,res)=>{
                 {email : email},
                 { $push: { enrolledCourses_id: name } }
             )
-            if(!resultUpdate) return res.status(400).json({error : "something wrong error : "+error})
+            if(!resultUpdate) return res.status(400).json({error : "something wrong error : "})
             return res.status(200).json({message : "added successfully"})
         
 

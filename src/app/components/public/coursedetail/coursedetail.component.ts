@@ -18,18 +18,37 @@ export class CoursedetailComponent implements OnInit {
   constructor(private courseService: CourseService,private route: ActivatedRoute, private spinner:SpinnerService,private router: Router,private userService: UserService) { }
  id:any;
  course:any;
+ name:any;
+ email:any;
  image! :Course;
  isverified!: Boolean ;
  
+ 
   ngOnInit(): void {
    this.init()
-  
+   
   }
 
   getcourse(){
-
+    
     if(this.course.price==0){
-      this.router.navigate(['/mycourses']);
+      let email=localStorage.getItem("email");
+     let name =this.course.name;
+     this.userService.enrollInCourse(email,name).subscribe(
+      res=>{
+        console.log(res);
+        
+  
+      },
+      err=>{
+        
+        console.log(err);
+      }
+
+
+
+     )
+      
     } else {
       this.router.navigate(['/home']);
     }

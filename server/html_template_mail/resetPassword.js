@@ -248,7 +248,7 @@
                       </table>
 
                               <div align="center">
-                                <a href="${host}/reset-password/${token}&role=${role}"><p>${host}/reset-password/${token}&role=${role}</p></a>
+                                <a href="${host}/reset-password/${token}/${role}"><p>${host}/reset-password/${token}/${role}</p></a>
                               </div>
 
 

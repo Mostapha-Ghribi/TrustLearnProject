@@ -38,6 +38,7 @@ import {MatSelectModule} from '@angular/material/select';
 import { SpinnerComponent } from './spinner/spinner.component';
 import { CoursesByCategoryComponent } from './components/public/courses-by-category/courses-by-category.component';
 import { ForgotPasswordComponent } from './components/public/forgot-password/forgot-password.component';
+import { ResetpasswordComponent } from './components/public/resetpassword/resetpassword.component';
 
 
 
@@ -73,7 +74,8 @@ import { ForgotPasswordComponent } from './components/public/forgot-password/for
     StudentcoursesComponent,
     SpinnerComponent,
     CoursesByCategoryComponent,
-    ForgotPasswordComponent
+    ForgotPasswordComponent,
+    ResetpasswordComponent
   ],
   imports: [
     BrowserModule,

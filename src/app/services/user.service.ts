@@ -44,8 +44,9 @@ export class UserService {
     return this.http.post('/api/v1/image-upload', formData);
   }
 
-  public enrollInCourse(user : User){
-    let dataFromAPI = this.http.put<any>(this.enrollInCourseAPI,user)
+  public enrollInCourse(email : any,name:any){
+    console.log(email,name);
+    let dataFromAPI = this.http.put<any>(this.enrollInCourseAPI,email,name)
     return dataFromAPI;
   }
   public loginUser(user: User) {
@@ -56,6 +57,12 @@ export class UserService {
   public forgetPass(user: User) {
     console.log(user);
     let dataFromAPI = this.http.put<any>(this.forgetPassword, user);
+    return dataFromAPI;
+  }
+
+  public resetPass(newPassword: any) {
+    console.log(newPassword);
+    let dataFromAPI = this.http.put<any>(this.resetPassword, newPassword);
     return dataFromAPI;
   }
 
@@ -82,6 +89,9 @@ export class UserService {
   public getUser(role: any,email:any){
     return this.http.get<any>(this.getUserAPI +email+'/'+role);
   }
+
+
+
 
 
   isverified(){

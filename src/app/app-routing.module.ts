@@ -10,6 +10,7 @@ import { RegisterComponent } from './components/public/register/register.compone
 import { AboutComponent } from './components/public/about/about.component';
 import { ContactComponent } from './components/public/contact/contact.component';
 import { ForgotPasswordComponent } from './components/public/forgot-password/forgot-password.component';
+import { ResetpasswordComponent } from './components/public/resetpassword/resetpassword.component';
 import { CoursesComponent } from './components/public/courses/courses.component';
 import { CoursesByCategoryComponent } from './components/public/courses-by-category/courses-by-category.component';
 import { StudentcoursesComponent } from './components/public/studentcourses/studentcourses.component';
@@ -64,6 +65,10 @@ const routes: Routes = [
   {
     path: 'ForgotPassword',
     component: ForgotPasswordComponent,
+  },
+  {
+    path: 'reset-password/:resetLink/:role',
+    component: ResetpasswordComponent,
   },
   {
     path: 'mycourses',
