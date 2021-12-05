@@ -50,7 +50,7 @@ export class UserService {
 
   public forgetPass(user: User) {
     console.log(user);
-    let dataFromAPI = this.http.post<any>(this.forgetPassword, user);
+    let dataFromAPI = this.http.put<any>(this.forgetPassword, user);
     return dataFromAPI;
   }
 

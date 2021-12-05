@@ -14,8 +14,16 @@ import { ToastrService } from 'ngx-toastr';
 export class ForgotPasswordComponent implements OnInit {
 
   loginForm : FormGroup
-
+  messageSucc : String | undefined
+  messageErr : String | undefined
+  showErrMessage : boolean | undefined
+  showSuccMessage : boolean | undefined
   constructor(private fb: FormBuilder, private userService: UserService, private router: Router, private spinner:SpinnerService,private toastr: ToastrService) { 
+    let messageSucc = "";
+    let showSuccMessage = false;
+    let messageErr = "";
+    let showErrMessage = false;
+    
     let formControls = {
       email: new FormControl('', [
         Validators.required,
@@ -32,6 +40,15 @@ export class ForgotPasswordComponent implements OnInit {
   get role() { return this.loginForm.get('role');  }
   ngOnInit(): void {
   }
+
+  ShowSucc(message: string) {
+    this.messageSucc = message;
+    this.showSuccMessage = true;
+}
+ShowErr(message: string) {
+  this.messageErr = message;
+  this.showErrMessage = true;
+}
   login(){
     this.spinner.requestStarted();
   let data = this.loginForm.value;
@@ -41,8 +58,8 @@ export class ForgotPasswordComponent implements OnInit {
     this.userService.forgetPass(user).subscribe(
       res => {
         this.spinner.requestEnded();
-        this.toastr.success("reset Password sent to your email");
-
+        this.ShowSucc(res.message);
+       // this.toastr.success("reset Password sent to your email");
         console.log(res);
 
         
@@ -50,6 +67,7 @@ export class ForgotPasswordComponent implements OnInit {
       },
       err => {
         this.spinner.resetSpinner();
+        this.ShowErr(err.error.error);
         console.log(err)
       }
     )

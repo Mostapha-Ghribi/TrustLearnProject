@@ -5,7 +5,7 @@ const crypto = require('crypto')
 const _ = require('lodash')
 const sgMail = require('@sendgrid/mail')
 const {Verify, Verified} = require('../html_template_mail/verify.js')
-const {ResetPassword} = require('../html_template_mail/resetPassword.js')
+const ResetPassword = require('../html_template_mail/resetPassword.js')
 const Joi = require('@hapi/joi')
 
 sgMail.setApiKey("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")
@@ -289,7 +289,7 @@ const ValidationSchema = Joi.object({
         case "student" : 
      Student.findOne({email},(err,student)=>{
         if(err || !student){
-            return res.status(400).json({error : "this student does not exists"});
+            return res.status(400).json({error : "this Email does not exists"});
         }
     })
 
@@ -310,7 +310,9 @@ const ValidationSchema = Joi.object({
             try{
             sgMail.send(msgStudent)
             console.log("success Email Sent !!");
-             res.json({message : "Email Sent Successfully !! (Reset Password) for student"})
+            let firstTwoLetters = email.substring(0,2)+"***";
+            let emailRes = firstTwoLetters+email.substring(email.indexOf("@"), );
+             res.json({message : "We've sent an email to "+emailRes+". Click the link in the email to reset your password. If you don't see the email, check other places it might be, like your junk, spam, social, or other folders."})
             }catch(err){
                 console.log("error msg",err);
             }
