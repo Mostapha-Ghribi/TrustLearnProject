@@ -199,27 +199,11 @@ const getAllCoursesByTeacher = async (req,res) => {
 //!-------------------------------------------------------------------------------------
 //* Get Course By Name (_id == name) with name as a param
 const getCourseByNamewithParam = async (name) =>{
-    const course_1 = await Course.findOne({name : name});
-    const course_2 = await Course.findOne({name : name},'_id name description teacher price image');
-    const AllChaps = course_1.chapters;
-    const chapitre_1 = await Chapter.findOne({_id : {$in :AllChaps}},'_id name description');
-    const chapitre_2 = await Chapter.findOne({_id : {$in :AllChaps}});
-    const AllLessons = chapitre_2.lessons;
-    const lesson_1 = await Lesson.findOne({_id : {$in :AllLessons}},'_id name');
-    const lesson_2 = await Lesson.findOne({_id : {$in :AllLessons}}); 
-    const AllVideos = lesson_2.videos;
-    const video = await Video.findOne({_id : {$in :AllVideos}}); 
-
-    var add_videos = {"videos" : video};
-    var lessons_final = Object.assign(lesson_1,add_videos);
-    var add_lessons = {"lessons" : lessons_final};
-    var chapters_final = Object.assign(chapitre_1,add_lessons);
-    var add_chapters = {"chapters" : chapters_final};
-    var course_final = Object.assign(course_2,add_chapters);
-
+        const course = await Course.findOne({name : name},'_id name description teacher price image');
+        const chapters = await getChaptersWithCourseParam(name);
+        var add_chapters = {"chapters" : chapters};
+        var course_final = Object.assign(course,add_chapters);
     return course_final ;
-    
-        
 }
 //!----------------------------------------------------------------------------------------
 

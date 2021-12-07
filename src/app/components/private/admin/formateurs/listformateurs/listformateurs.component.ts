@@ -27,15 +27,4 @@ export class ListformateursComponent implements OnInit {
   
   }
 
-  delete(student:User) {
-
-    this.userService.deleteUser(student.id).subscribe(
-      res=>{
-        this.toastr.error(res.message);
-      },
-      err =>{
-        console.log(err);
-      }
-    )
-  }
 }

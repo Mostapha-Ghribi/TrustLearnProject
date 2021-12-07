@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from 'src/app/services/user.service';
+import { SpinnerService } from 'src/app/spinner.service';
 
 @Component({
   selector: 'app-studentcourses',
@@ -8,7 +9,7 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class StudentcoursesComponent implements OnInit {
 
-  constructor(private userService : UserService) { }
+  constructor(private userService : UserService , private spinnerService : SpinnerService) { }
 
   ngOnInit(): void {
     this.getCoursesEnrolled();
@@ -17,15 +18,16 @@ export class StudentcoursesComponent implements OnInit {
   getCoursesEnrolled(){
     let email=localStorage.getItem("email");
 
-
+     this.spinnerService.requestStarted();
      this.userService.getCoursesEnrolled(email).subscribe(
       res=>{
+        this.spinnerService.requestEnded();
         console.log(res);
         
   
       },
       err=>{
-        
+        this.spinnerService.resetSpinner();
         console.log(err);
       }
 

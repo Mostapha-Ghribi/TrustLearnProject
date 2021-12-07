@@ -108,22 +108,22 @@ const ValidationSchema = Joi.object({
    
            const tokenStudent = jwt.sign({ email: resultStudent.email, id:resultStudent._id},'test', {expiresIn: "1h"})
    
-           res.status(200).json({resultStudent ,tokenStudent});
-           break;
+            return res.status(200).json({resultStudent ,tokenStudent});
+           //break;
            case "teacher":
             const existingTeacher = await Teacher.findOne({email});
             if(existingTeacher) return res.status(500).json({message : "Teacher Already exists."});  
-            if(password !== confirmpassword) return res.status(404).json({message : "Password don't match."});
     
-            const hashedPassword = await bcrypt.hash(password, 12);
-            const EmailToken = crypto.randomBytes(64).toString('hex');
+            const hashedPasswordTeacher = await bcrypt.hash(password, 12);
+            const EmailTokenTeacher = crypto.randomBytes(64).toString('hex');
+
             
-            const result = await Teacher.create({
+            const resultTeacher = await Teacher.create({
                 email,
-                password : hashedPassword,
+                password : hashedPasswordTeacher,
                 name: `${firstname} ${lastname}`,
                 isVerified : false,
-                emailToken : EmailToken,
+                emailToken : EmailTokenTeacher,
                 avatar : avatar
             })
     
@@ -134,30 +134,20 @@ const ValidationSchema = Joi.object({
                 text : `
                 Hello thanks for your registering on our site.
                 Please copy and paste the adress below to verify your account.
-                http://${req.headers.host}/verify-email?token=${EmailToken}&role=teacher
+                http://${req.headers.host}/verify-email?token=${EmailTokenTeacher}&role=teacher
                 `,
-                html:Verify(req.headers.host,EmailToken,firstname,"teacher")
+                html:Verify(req.headers.host,EmailTokenTeacher,firstname,"teacher")
             }
             try{
                 await sgMail.send(msg)
                 console.log("success !! Teacher Created");
-              /* mg.messages().send(msg, function(error,body){
-                   if(error){
-                       return res.json({
-                           error : err.message
-                       })
-                   }
-                   return res.json({
-                       message : 'Email has been sent'
-                   })
-               })*/
             }catch(err){
                 console.log("error msg Sign Up Teacher",err);
             }
     
-            const token = jwt.sign({ email: result.email, id:result._id},'test', {expiresIn: "1h"})
+            const tokenTeacher = jwt.sign({ email: resultTeacher.email, id:resultTeacher._id},'test', {expiresIn: "1h"})
     
-            res.status(200).json({result ,token});
+            res.status(200).json({resultTeacher ,tokenTeacher});
             break;
         }
         
@@ -489,7 +479,7 @@ const getUser = async (req,res)=>{
         switch(role){
             case "student" : 
                 const student = await Student.findOne({email : email});
-                console.log(student);
+               // console.log(student);
                 return res.status(200).json(student);
             case "teacher":
                 const teacher = await Teacher.findOne({email : email});

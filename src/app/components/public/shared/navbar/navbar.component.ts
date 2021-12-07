@@ -77,9 +77,8 @@ $(".close, .shadow").on('click',function(){
   
 
   logout(){
-    localStorage.removeItem("token");
-    localStorage.removeItem("email");
-    localStorage.removeItem("role");
+    localStorage.clear();
+  
     this.router.navigate(['/login'])
   }
 

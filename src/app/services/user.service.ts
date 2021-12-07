@@ -10,22 +10,16 @@ import { BehaviorSubject } from 'rxjs';
 export class UserService {
 
   private getUserAPI = "http://localhost:8000/api/user/getUser/"
-  private signUp = "http://localhost:8000/api/user/signup";
-  private signIn = "http://localhost:8000/api/user/signin";
+  private signUpAPI = "http://localhost:8000/api/user/signup";
+  private signInAPI = "http://localhost:8000/api/user/signin";
   private verifyEmailAPI = "http://localhost:8000/api/user/verify-email";
-  private forgetPassword = "http://localhost:8000/api/user/forget-password";
-  private resetPassword = "http://localhost:8000/api/user/reset-password";
-  private getStudentsAPI = "http://localhost:8000/api/user/getAllStudents";
-  private getTeachersAPI = "http://localhost:8000/api/user/getAllTeachers";
+  private forgetPasswordAPI = "http://localhost:8000/api/user/forget-password";
+  private resetPasswordAPI = "http://localhost:8000/api/user/reset-password";
+  private getAllStudentsAPI = "http://localhost:8000/api/user/getAllStudents";
   private enrollInCourseAPI = "http://localhost:8000/api/user/enrollInCourse";
   private getCoursesEnrolledAPI = "http://localhost:8000/api/user/enrolledCourses";
+  private getAllTeachersAPI = "http://localhost:8000/api/user/getAllTeachers"
 
-
-
-  private allUsersUrl = "http://localhost:8080/users/all";
-  private getOneUserUrl = "http://localhost:8080/users/one/";
-  private updateUserUrl = "http://localhost:8080/users/update";
-  private deleteUserUrl = "http://localhost:8080/users/delete/";
 
   public resetLink = "";
   public role = "";
@@ -43,70 +37,49 @@ params=params.append('role', role!= null ? role : "");
   }
 
   public addUser(user: User) {
-    let dataFromAPI = this.http.post<any>(this.signUp, user);
+    let dataFromAPI = this.http.post<any>(this.signUpAPI, user);
     return dataFromAPI;
-  }
-  public uploadImage(image: File){
-    const formData = new FormData();
-
-    formData.append('image', image);
-
-    return this.http.post('/api/v1/image-upload', formData);
   }
 
   public enrollInCourse(email : any,name:any){
-    console.log(email,name);
-    let dataFromAPI = this.http.put<any>(this.enrollInCourseAPI,email,name)
+    //console.log(email,name);
+    let dataFromAPI = this.http.put<any>(this.enrollInCourseAPI,{email , name})
     return dataFromAPI;
   }
   public getCoursesEnrolled(email : any){
-    console.log(email)
+    //console.log(email)
     let dataFromAPI = this.http.get<any>(this.getCoursesEnrolledAPI,email)
     return dataFromAPI;
   }
   public loginUser(user: User) {
-    let dataFromAPI = this.http.post<any>(this.signIn, user);
+    let dataFromAPI = this.http.post<any>(this.signInAPI, user);
     return dataFromAPI;
   }
 
   public forgetPass(user: User) {
-    let dataFromAPI = this.http.put<any>(this.forgetPassword, user);
+    let dataFromAPI = this.http.put<any>(this.forgetPasswordAPI, user);
     console.log(dataFromAPI)
     return dataFromAPI;
   }
 
   public resetPass(user: any, resetLink:any,role : any) {
-    let dataFromAPI = this.http.put<any>(this.resetPassword+'/'+resetLink+'/'+role, user);
+    let dataFromAPI = this.http.put<any>(this.resetPasswordAPI+'/'+resetLink+'/'+role, user);
     return dataFromAPI;
   }
 
   public getAllStudents() {
-    let data = this.http.get<any>(this.getStudentsAPI);
+    let data = this.http.get<any>(this.getAllStudentsAPI);
     return data;
   }
 
   public getAllTeachers() {
-    let data = this.http.get<any>(this.getTeachersAPI);
+    let data = this.http.get<any>(this.getAllTeachersAPI);
     return data;
   }
-  public getOneUser(id: any) {
-    return this.http.get<any>(this.getOneUserUrl + id);
-  }
 
-  public updateUser(user: User) {
-    return this.http.patch<any>(this.updateUserUrl, user);
-  }
-
-  public deleteUser(id: any) {
-    return this.http.delete<any>(this.deleteUserUrl + id);
-  }
   public getUser(role: any,email:any){
     return this.http.get<any>(this.getUserAPI +email+'/'+role);
   }
-
-
-
-
 
   isverified(){
 
