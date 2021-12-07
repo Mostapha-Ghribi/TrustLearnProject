@@ -41,7 +41,7 @@ const ValidationSchema = Joi.object({
             const isPassTeacherCorrect = await bcrypt.compare(password,existingTeacher.password);
                 if(!isPassTeacherCorrect) return res.status(400).json({message : "Invalid credentials"});
             const tokenTeacher = jwt.sign({ email: existingTeacher.email, id:existingTeacher._id},'test', {expiresIn: "1h"})
-            res.status(200).json({result : existingTeacher,tokenTeacher});
+            res.status(200).json({result : existingTeacher,role,tokenTeacher});
             break;
      } 
 }catch(error){
@@ -64,7 +64,6 @@ const ValidationSchema = Joi.object({
             case "student":
                 const existingStudent = await Student.findOne({email});
            if(existingStudent) return res.status(500).json({message : "Student Already exists."});  
-          // if(password !== confirmpassword) return res.status(400).json({message : "Password don't match."});
    
            const hashedPasswordStudent = await bcrypt.hash(password, 12);
            const EmailTokenStudent = crypto.randomBytes(64).toString('hex');
@@ -85,23 +84,13 @@ const ValidationSchema = Joi.object({
                text : `
                Hello thanks for your registering on our site.
                Please copy and paste the adress below to verify your account.
-               http://${req.headers.host}/verify-email?token=${EmailTokenStudent}&role=student
+               http://localhost:4200/verify-email?token=${EmailTokenStudent}&role=student
                `,
                html:Verify(req.headers.host,EmailTokenStudent,firstname,"student")
            }
            try{
                await sgMail.send(msgStudent)
                console.log("success !! Student Created");
-             /* mg.messages().send(msg, function(error,body){
-                  if(error){
-                      return res.json({
-                          error : err.message
-                      })
-                  }
-                  return res.json({
-                      message : 'Email has been sent'
-                  })
-              })*/
            }catch(err){
                console.log("error msg Sign Up Student",err);
            }
@@ -134,7 +123,7 @@ const ValidationSchema = Joi.object({
                 text : `
                 Hello thanks for your registering on our site.
                 Please copy and paste the adress below to verify your account.
-                http://${req.headers.host}/verify-email?token=${EmailTokenTeacher}&role=teacher
+                http://localhost:4200/verify-email?token=${EmailTokenTeacher}&role=teacher
                 `,
                 html:Verify(req.headers.host,EmailTokenTeacher,firstname,"teacher")
             }
@@ -492,7 +481,14 @@ const getUser = async (req,res)=>{
 const enrollInCourse = async (req,res)=>{
     const{email,name} = req.body;
     try{
-        console.log(email , name);
+        const student = await Student.findOne(email);
+        const coursesEnrolled = await student.enrolledCourses_id;
+        console.log("helllllloooooooooooooooooooooooooo");
+        console.log(coursesEnrolled);
+        if(coursesEnrolled.indexOf(name) !== -1){
+            return res.status(400).json({message : "You are already enrolled in this course ! "})
+        }
+       // console.log(email , name);
             const resultUpdate = await Student.findOneAndUpdate(
                 {email : email},
                 { $push: { enrolledCourses_id: name } }
@@ -523,6 +519,8 @@ const getCoursesFromStudent = async (req,res)=>{
         return res.status(400).json({error : "something wrong error : "+error})
     }
 }
+
+
 
 
 module.exports = {getCoursesFromStudent, signin , signup , verifyEmail , enrollInCourse, resetPassword ,getStudentByEmail, forgetPassword, getAllStudents, getAllTeachers, getUser}

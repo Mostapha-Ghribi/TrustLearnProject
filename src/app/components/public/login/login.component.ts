@@ -55,12 +55,19 @@ export class LoginComponent implements OnInit {
     this.userService.loginUser(user).subscribe(
       res => {
         this.spinner.requestEnded();
-        let token = res.token ;
         let email = res.result.email;
         let verified = res.result.isVerified;
         let role = res.role;
+        let token = "";
+        if(role == "student"){
+          token = res.token; 
+        }else{
+          token = res.tokenTeacher;
+        }
+        
+       
 
-        console.log(verified);
+        //console.log(verified);
         localStorage.setItem("verified",verified)
         localStorage.setItem("email",email)
         localStorage.setItem("token", token)

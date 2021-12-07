@@ -5,6 +5,7 @@ import { Course } from 'src/app/models/course';
 import { DomSanitizer } from '@angular/platform-browser';
 import { SpinnerService } from 'src/app/spinner.service';
 import { UserService } from 'src/app/services/user.service';
+import { ToastrService } from 'ngx-toastr';
 
 
 
@@ -15,7 +16,7 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class CoursedetailComponent implements OnInit {
   
-  constructor(private courseService: CourseService,private route: ActivatedRoute, private spinner:SpinnerService,private router: Router,private userService: UserService) { }
+  constructor(    private toastr: ToastrService,    private courseService: CourseService,private route: ActivatedRoute, private spinner:SpinnerService,private router: Router,private userService: UserService) { }
  id:any;
  course:any;
  name:any;
@@ -34,14 +35,18 @@ export class CoursedetailComponent implements OnInit {
     if(this.course.price==0){
       let email=localStorage.getItem("email");
      let name =this.course.name;
+     this.spinner.requestStarted();
      this.userService.enrollInCourse(email,name).subscribe(
       res=>{
+        this.spinner.requestEnded();
         console.log(res);
-        
+        this.router.navigate(['/mycourses']);
   
       },
       err=>{
-        
+        this.spinner.resetSpinner();
+        this.toastr.warning(err);
+
         console.log(err);
       }
 

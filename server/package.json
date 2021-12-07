@@ -4,8 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon index.js",
-    "test": "cypress run"
+    "start": "pm2 start index.js --watch",
+    "test": "cypress run",
+    "stop": "pm2 stop index.js --watch",
+    "restart" : "pm2 restart index.js --watch"
+
   },
   "repository": {
     "type": "git",
@@ -37,6 +40,7 @@
   },
   "devDependencies": {
     "cypress": "^9.1.0",
-    "nodemon": "^2.0.15"
+    "nodemon": "^2.0.15",
+    "pm2": "^5.1.2"
   }
 }
