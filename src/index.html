@@ -88,8 +88,8 @@ $(".close, .shadow").click(function(){
 
 $(document).on('click','.arrow',function () {
 		  var parent = $(this).closest('ul');
-		  var child = parent.find("ul:first");
-
+		  var child = parent.find("ul.childdd");
+      console.log(child);
       var childd=child.closest("li")
           
       

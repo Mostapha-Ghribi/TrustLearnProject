@@ -8,7 +8,7 @@ import { SpinnerService } from 'src/app/spinner.service';
   styleUrls: ['./studentcourses.component.css']
 })
 export class StudentcoursesComponent implements OnInit {
-
+  courselist:any;
   constructor(private userService : UserService , private spinnerService : SpinnerService) { }
 
   ngOnInit(): void {
@@ -22,6 +22,7 @@ export class StudentcoursesComponent implements OnInit {
      this.userService.getCoursesEnrolled(email).subscribe(
       res=>{
         this.spinnerService.requestEnded();
+        this.courselist=res;
         console.log(res);
         
   

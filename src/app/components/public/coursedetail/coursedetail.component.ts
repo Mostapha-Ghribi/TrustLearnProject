@@ -45,9 +45,9 @@ export class CoursedetailComponent implements OnInit {
       },
       err=>{
         this.spinner.resetSpinner();
-        this.toastr.warning(err);
+        this.toastr.success(err.error.message);
 
-        console.log(err);
+        console.log(err.error.message);
       }
 
 
@@ -68,7 +68,7 @@ init(){
   this.courseService.getOneCourse(idc).subscribe(
     res=>{
       this.course=res;
-      console.log(this.course);
+      console.log(this.course.chapters);
       
       this.spinner.requestEnded()
 

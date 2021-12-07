@@ -481,7 +481,7 @@ const getUser = async (req,res)=>{
 const enrollInCourse = async (req,res)=>{
     const{email,name} = req.body;
     try{
-        const student = await Student.findOne(email);
+        const student = await Student.findOne({email:email});
         const coursesEnrolled = await student.enrolledCourses_id;
         console.log("helllllloooooooooooooooooooooooooo");
         console.log(coursesEnrolled);
