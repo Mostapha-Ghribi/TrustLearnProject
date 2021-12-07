@@ -1,5 +1,6 @@
 //* Requiring Modules !!
 const {Course, Chapter, Lesson, Video, Category} = require('../models/model.js')
+const {getChaptersWithCourseParam} = require('./chapter.js')
 //!----------------------------------------------------------------------
 //* Create Course
 const createCourse = async (req,res) => {
@@ -95,12 +96,13 @@ const getCoursesByCategoryIntoArray = async (req,res)=>{
 //!-------------------------------------------------------------------------------------
 
 //* Get Course By Name (_id == name)
-const getCourse = async (req,res) => {
+const getCourseOld = async (req,res) => {
     try{
         const {name} = req.params;
         const course_1 = await Course.findOne({name : name});
         const course_2 = await Course.findOne({name : name},'_id name description teacher price image');
         const AllChaps = course_1.chapters;
+        console.log(AllChaps);
         const chapitre_1 = await Chapter.findOne({_id : {$in :AllChaps}},'_id name description');
         const chapitre_2 = await Chapter.findOne({_id : {$in :AllChaps}});
         const AllLessons = chapitre_2.lessons;
@@ -115,6 +117,26 @@ const getCourse = async (req,res) => {
         var chapters_final = Object.assign(chapitre_1,add_lessons);
         var add_chapters = {"chapters" : chapters_final};
         var course_final = Object.assign(course_2,add_chapters);
+    
+    
+        res.status(200).json(course_final);
+        }catch(error){
+            res.status(400).json({error : "nope error : "+error})
+        }
+
+}
+//!-------------------------------------------------------------------------------------
+
+//* Get Course By Name (_id == name)
+const getCourse = async (req,res) => {
+    try{
+        const {name} = req.params;
+        const course = await Course.findOne({name : name},'_id name description teacher price image');
+        //console.log(course)
+        const chapters = await getChaptersWithCourseParam(name);
+        console.log(chapters);
+        var add_chapters = {"chapters" : chapters};
+        var course_final = Object.assign(course,add_chapters);
     
     
         res.status(200).json(course_final);

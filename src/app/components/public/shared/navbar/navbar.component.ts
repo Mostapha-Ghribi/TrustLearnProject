@@ -55,6 +55,7 @@ $(".close, .shadow").on('click',function(){
     this.userService.getUser(role,email).subscribe(
       result=>{
         this.user = result
+        console.log(this.user)
         console.log(this.isverified);
       },
       error=>{

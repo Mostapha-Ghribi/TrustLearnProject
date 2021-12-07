@@ -87,6 +87,17 @@ const updateVideo = async (req,res) => {
     return res.status(400).json({error : "something wrong error : "+error})
 }
 };
+//!--------------------------------------------------------------------------------------------------------
 
+const getVideosWithLessonAsParam = async (name) => {
+    const lesson = await Lesson.findOne({name : name});
+    const Videos = lesson.videos;
+    var result = [];
+    for await (const video of Videos) {
+        const V = await Video.findOne({_id : video});
+        result.push(V)
+      }
+    return result;
+};
 
-module.exports = {createVideo , deleteVideo , updateVideo}
+module.exports = {createVideo , deleteVideo , updateVideo , getVideosWithLessonAsParam}

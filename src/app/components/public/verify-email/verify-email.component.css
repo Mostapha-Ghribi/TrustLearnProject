@@ -1,0 +1,25 @@
+
+.emailVerify {
+    position: fixed;
+    margin-top: 5%;
+    width: 300px;
+    margin-left: 28%;
+    display: block;
+}
+.confirm{
+position : fixed;
+margin-top: 30%;
+margin-left: 37%;
+color  :#0062B4;
+font-weight: bold;
+font-size: 40px;
+}
+.text-message{
+    position : fixed;
+    margin-top: 35%;
+    margin-left: 30%;
+    margin-right: 30%;
+    color  :#000000;
+    font-size: 20px;
+
+}

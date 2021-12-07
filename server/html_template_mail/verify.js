@@ -301,7 +301,7 @@
                       </table>
 
                               <div align="center">
-                                <p>http://${host}/verify-email?token=${EmailToken}&role=${role}</p>
+                                <p>http://localhost:4200/verify-email?token=${EmailToken}&role=${role}</p>
                               </div>
 
                       <table style="font-family:'Cabin',sans-serif;" role="presentation" cellpadding="0" cellspacing="0" width="100%" border="0">

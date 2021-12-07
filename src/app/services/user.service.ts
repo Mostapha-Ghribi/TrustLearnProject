@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { User } from '../models/user';
 import { JwtHelperService } from "@auth0/angular-jwt";
 import { BehaviorSubject } from 'rxjs';
@@ -12,7 +12,7 @@ export class UserService {
   private getUserAPI = "http://localhost:8000/api/user/getUser/"
   private signUp = "http://localhost:8000/api/user/signup";
   private signIn = "http://localhost:8000/api/user/signin";
-  private verifyEmail = "http://localhost:8000/api/user/verify-email";
+  private verifyEmailAPI = "http://localhost:8000/api/user/verify-email";
   private forgetPassword = "http://localhost:8000/api/user/forget-password";
   private resetPassword = "http://localhost:8000/api/user/reset-password";
   private getStudentsAPI = "http://localhost:8000/api/user/getAllStudents";
@@ -34,6 +34,13 @@ export class UserService {
 
 
 
+  public verifyEmail(emailToken:any,role : any){
+    let params = new HttpParams();
+params=params.append('token', emailToken!= null ? emailToken : "");
+params=params.append('role', role!= null ? role : "");
+    let dataFromAPI = this.http.get<any>(this.verifyEmailAPI,{params});
+    return dataFromAPI;
+  }
 
   public addUser(user: User) {
     let dataFromAPI = this.http.post<any>(this.signUp, user);

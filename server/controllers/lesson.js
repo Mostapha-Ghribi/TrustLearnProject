@@ -1,5 +1,6 @@
 //* Importing modules
 const {Course, Chapter, Lesson, Video, Category} = require('../models/model.js')
+const {getVideosWithLessonAsParam} = require('./video.js')
 //!----------------------------------------------------------------------
 //* Create Lesson
 const createLesson = async (req,res) => {
@@ -67,6 +68,20 @@ const getLessonsByChaptrIntoArray = async (req,res)=>{
         return res.status(400).json({error : "something went wrong error : "+error})
     }
 }
-//Export Modules
+//!----------------------------------------------------------------------------------------
+const getLessonsWithChapterParam = async (name)=>{
+        const chapter = await Chapter.findOne({name : name});
+        const lessons = chapter.lessons;
+        var result = [];
+    for await (const lesson of lessons) {
+        const L = await Lesson.findOne({name : lesson},'_id name');
+        const Videos = await getVideosWithLessonAsParam(lesson);
+        var add_videos = {"videos" : Videos};
+        var lesson_final = Object.assign(L,add_videos);
+        result.push(lesson_final)
+      }
+    return result;
+}
+//*Export Modules
 
-module.exports = {createLesson, deleteLesson, updateLesson, getLessonsByChaptrIntoArray};
+module.exports = {createLesson, deleteLesson, updateLesson, getLessonsByChaptrIntoArray, getLessonsWithChapterParam};

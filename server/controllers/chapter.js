@@ -1,4 +1,5 @@
 const {Course, Chapter, Lesson, Video, Category} = require('../models/model.js')
+const {getLessonsWithChapterParam} = require('./lesson.js')
 //!----------------------------------------------------------------------
 
 //* Create Chapter
@@ -73,6 +74,20 @@ const getChaptersByCourseIntroArray = async (req,res) =>{
         return res.status(400).json({error : "something went wrong error : "+error})
     }
 }
+//!----------------------------------------------------------------------------------------
+const getChaptersWithCourseParam = async (name)=>{
+    const course = await Course.findOne({name : name});
+    const chapters = course.chapters;
+    var result = [];
+for await (const chapter of chapters) {
+    const C = await Chapter.findOne({name : chapter},'_id name description');
+    const Lessons = await getLessonsWithChapterParam(chapter);
+    var add_lessons = {"lessons" : Lessons};
+    var chapter_final = Object.assign(C,add_lessons);
+    result.push(chapter_final)
+  }
+return result;
+}
 //Export Modules
 
-module.exports = {createChapter, deleteChapter, updateChapter, getChaptersByCourseIntroArray};
+module.exports = {getChaptersWithCourseParam, createChapter, deleteChapter, updateChapter, getChaptersByCourseIntroArray};

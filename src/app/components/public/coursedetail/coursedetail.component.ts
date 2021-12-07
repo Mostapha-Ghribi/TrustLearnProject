@@ -63,6 +63,8 @@ init(){
   this.courseService.getOneCourse(idc).subscribe(
     res=>{
       this.course=res;
+      console.log(this.course);
+      
       this.spinner.requestEnded()
 
     },

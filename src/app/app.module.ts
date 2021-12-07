@@ -39,6 +39,7 @@ import { SpinnerComponent } from './spinner/spinner.component';
 import { CoursesByCategoryComponent } from './components/public/courses-by-category/courses-by-category.component';
 import { ForgotPasswordComponent } from './components/public/forgot-password/forgot-password.component';
 import { ResetpasswordComponent } from './components/public/resetpassword/resetpassword.component';
+import { VerifyEmailComponent } from './components/public/verify-email/verify-email.component';
 
 
 
@@ -75,7 +76,8 @@ import { ResetpasswordComponent } from './components/public/resetpassword/resetp
     SpinnerComponent,
     CoursesByCategoryComponent,
     ForgotPasswordComponent,
-    ResetpasswordComponent
+    ResetpasswordComponent,
+    VerifyEmailComponent
   ],
   imports: [
     BrowserModule,

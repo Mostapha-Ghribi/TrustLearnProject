@@ -50,7 +50,7 @@ const ValidationSchema = Joi.object({
 }
 
  const signup = async (req,res) => {
-    const {email, password , firstname, lastname,role, file} = req.body;
+    const {email, password , firstname, lastname,role, avatar} = req.body;
     const {errorSignUp} = ValidationSchema.validate(req.body);
     try {
         if(errorSignUp){
@@ -75,7 +75,7 @@ const ValidationSchema = Joi.object({
                name: `${firstname} ${lastname}`,
                isVerified : false,
                emailToken : EmailTokenStudent,
-               avatar : file
+               avatar : avatar
            })
    
            const msgStudent = {
@@ -124,7 +124,7 @@ const ValidationSchema = Joi.object({
                 name: `${firstname} ${lastname}`,
                 isVerified : false,
                 emailToken : EmailToken,
-                avatar : file
+                avatar : avatar
             })
     
             const msg = {
@@ -176,7 +176,7 @@ const ValidationSchema = Joi.object({
                 const student = await Student.findOne({emailToken : req.query.token});
         if(!student){
             console.log("token is invalid");
-            return res.status(400),json({error : "incorrected or Expired link"})
+            return res.status(400).json({error : "incorrected or Expired link"})
         }else{
         student.emailToken = null;
         student.isVerified = true;
@@ -489,6 +489,7 @@ const getUser = async (req,res)=>{
         switch(role){
             case "student" : 
                 const student = await Student.findOne({email : email});
+                console.log(student);
                 return res.status(200).json(student);
             case "teacher":
                 const teacher = await Teacher.findOne({email : email});
@@ -501,6 +502,7 @@ const getUser = async (req,res)=>{
 const enrollInCourse = async (req,res)=>{
     const{email,name} = req.body;
     try{
+        console.log(email , name);
             const resultUpdate = await Student.findOneAndUpdate(
                 {email : email},
                 { $push: { enrolledCourses_id: name } }
