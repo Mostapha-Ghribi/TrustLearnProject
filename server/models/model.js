@@ -58,6 +58,14 @@ const studentSchema = mongoose.Schema({
     avatar:{type : String},
 },{timestamps:true})
 //!------------------------------------------------
+// Admin Modal Schema
+const adminSchema = mongoose.Schema({
+    name : {type : String, required : true},
+    email:{type : String, required : true},
+    password:{type : String, required : true},
+    avatar:{type : String},
+},{timestamps:true})
+//!------------------------------------------------
   
 // Teacher Modal Schema
 const teacherSchema = new mongoose.Schema({
@@ -80,8 +88,9 @@ const Lesson = mongoose.model('lesson', lessonSchema,"Lessons");
 const Video = mongoose.model('video', videoSchema,"Videos");
 const Student = mongoose.model('student', studentSchema,"Students");
 const Teacher = mongoose.model('teacher', teacherSchema,"Teachers");
+const Admin = mongoose.model('admin', adminSchema,"Admins");
 
 //!------------------------------------------------
   
 // Exporting our model objects
-module.exports = {Course , Student , Teacher, Video, Chapter, Lesson, Category}
+module.exports = {Course , Student , Teacher, Video, Chapter, Lesson, Category, Admin}

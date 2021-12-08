@@ -1,6 +1,6 @@
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
-const {Student, Teacher} = require('../models/model.js')
+const {Student, Teacher, Admin} = require('../models/model.js')
 const crypto = require('crypto')
 const {getCourseByNamewithParam} = require('./course.js')
 const _ = require('lodash')
@@ -42,6 +42,14 @@ const ValidationSchema = Joi.object({
                 if(!isPassTeacherCorrect) return res.status(400).json({message : "Invalid credentials"});
             const tokenTeacher = jwt.sign({ email: existingTeacher.email, id:existingTeacher._id},'test', {expiresIn: "1h"})
             res.status(200).json({result : existingTeacher,role,tokenTeacher});
+            break;
+        case "admin":
+            const existingAdmin = await Admin.findOne({email});
+                if(!existingAdmin) return res.status(404).json({message : "Admin doesn't exist."});
+            const isPassAdminCorrect = await bcrypt.compare(password,existingAdmin.password);
+                if(!isPassAdminCorrect) return res.status(400).json({message : "Invalid credentials"});
+            const tokenAdmin = jwt.sign({ email: existingAdmin.email, id:existingAdmin._id},'test', {expiresIn: "1h"})
+            res.status(200).json({result : existingAdmin,role,tokenAdmin});
             break;
      } 
 }catch(error){
@@ -473,6 +481,9 @@ const getUser = async (req,res)=>{
             case "teacher":
                 const teacher = await Teacher.findOne({email : email});
                 return res.status(200).json(teacher);
+                case "admin":
+                    const admin = await Admin.findOne({email : email});
+                    return res.status(200).json(admin);
         }
     }catch(error){
         return res.status(200).json({error : "something went wrong error : "+error})

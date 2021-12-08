@@ -621,11 +621,30 @@ section {
 
 .level-god{
     font-size: 14px;
-    background: #5fcf80;
+    background: #1b1b1b;
     padding: 4px 4px;
+    width: 100%;
+    line-height: 40px;
     color: #fff;
     border-radius: 4px;
+
+
 }
+.level-god ul{
+    height: auto;
+    background: #1b1b1b;
+    list-style: none;
+    border-radius: 5px;
+}
+
+.level-god h2 span{
+    float: right;
+    line-height: 40px;
+    transition: 0.5s;
+  }
+  .level-god h2 span.rotate{
+    transform: rotate(-180deg);
+  }
 
 .courses .course-content h4 {
     font-size: 14px;

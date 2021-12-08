@@ -9,14 +9,28 @@ import { ToastrService } from 'ngx-toastr';
 
 
 
+
 @Component({
   selector: 'app-coursedetail',
   templateUrl: './coursedetail.component.html',
   styleUrls: ['./coursedetail.component.css']
 })
 export class CoursedetailComponent implements OnInit {
-  
-  constructor(    private toastr: ToastrService,    private courseService: CourseService,private route: ActivatedRoute, private spinner:SpinnerService,private router: Router,private userService: UserService) { }
+   Exist = false;
+  safeURL: any;
+
+  constructor(  
+          private toastr: ToastrService,
+          private courseService: CourseService,
+          private route: ActivatedRoute, 
+          private spinner:SpinnerService,
+          private router: Router,
+          private userService: UserService,
+          private _sanitizer: DomSanitizer
+          ) {
+            //this.safeURL = this._sanitizer.bypassSecurityTrustResourceUrl("https://www.youtube.com/embed/56w4C7HeAGY");
+
+   }
  id:any;
  course:any;
  name:any;
@@ -24,12 +38,13 @@ export class CoursedetailComponent implements OnInit {
  image! :Course;
  isverified!: Boolean ;
  
- 
   ngOnInit(): void {
    this.init()
    
   }
-
+Existance(){
+  this.Exist = true;
+}
   getcourse(){
     
     if(this.course.price==0){
@@ -45,8 +60,8 @@ export class CoursedetailComponent implements OnInit {
       },
       err=>{
         this.spinner.resetSpinner();
-        this.toastr.success(err.error.message);
-
+        //this.toastr.success(err.error.message);
+        this.Existance();
         console.log(err.error.message);
       }
 

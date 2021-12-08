@@ -42,7 +42,6 @@ params=params.append('role', role!= null ? role : "");
   }
 
   public enrollInCourse(email : any,name:any){
-    //console.log(email,name);
     let dataFromAPI = this.http.put<any>(this.enrollInCourseAPI,{email , name})
     return dataFromAPI;
   }
@@ -110,32 +109,32 @@ params=params.append('role', role!= null ? role : "");
 
   isLoggedInAdmin() {
     let token = localStorage.getItem("token");
-
+    let role = localStorage.getItem('role');
+    if(role == "admin"){
     if (token) {
       //1 - decodage mta3 token
-      const helper = new JwtHelperService();
-      const decodedToken = helper.decodeToken(token);
-      //2 - verification 3al role , ken admin ? true : false
-      return decodedToken.role == "admin" ? true : false
+      return  true ;
+
     } else {
       return false;
     }
+  }else return false;
   }
 
 
   isLoggedInStudent() {
     
     let token = localStorage.getItem("token");
-
+    let role = localStorage.getItem('role');
+    if(role == "student"){
     if (token) {
       //1 - decodage mta3 token
-      const helper = new JwtHelperService();
-      const decodedToken = helper.decodeToken(token);
-      //2 - verification 3al role , ken student ? true : false
-      return decodedToken.role == "student" ? true : false
+      return  true ;
+
     } else {
       return false;
     }
+  }else return false;
 
   }
 
@@ -143,17 +142,20 @@ params=params.append('role', role!= null ? role : "");
   isLoggedInTrainer() {
     
     let token = localStorage.getItem("token");
-
+    let role = localStorage.getItem('role');
+    if(role == "teacher"){
     if (token) {
       //1 - decodage mta3 token
-      const helper = new JwtHelperService();
-      const decodedToken = helper.decodeToken(token);
-      //2 - verification 3al role , ken trainer ? true : false
-      return decodedToken.role == "trainer" ? true : false
+      return  true ;
+
     } else {
       return false;
     }
-
+  }else{
+    return  false;
   }
 
+  }
+  
+  
 }

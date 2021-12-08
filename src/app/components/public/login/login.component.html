@@ -31,6 +31,7 @@
                     <select formControlName="role" style="margin-bottom: 10px;" class="custom-select">                                      
        <option value="student" selected>student</option>
        <option value="teacher">teacher</option>
+       <option value="admin">admin</option>
        <div *ngIf="role?.touched && role?.invalid">
         <small *ngIf="role?.errors?.required" class="text-danger">role is required<br></small>
     </div>

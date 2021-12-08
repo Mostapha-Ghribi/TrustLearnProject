@@ -10,7 +10,7 @@ import { User } from 'src/app/models/user';
 })
 export class ListformateursComponent implements OnInit {
 
-  TeachersList = [];
+  TeachersList : any;
   constructor(private userService:UserService,private toastr: ToastrService) { }
 
   ngOnInit(): void {
@@ -25,6 +25,9 @@ export class ListformateursComponent implements OnInit {
       }
     )
   
+  }
+  isVerified(user : any){
+    return user.isVerified;
   }
 
 }

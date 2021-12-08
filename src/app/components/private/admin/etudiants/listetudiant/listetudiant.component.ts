@@ -17,13 +17,15 @@ export class ListetudiantComponent implements OnInit {
     this.userService.getAllStudents().subscribe(
       result=>{
         this.StudentList = result
-        console.log(this.StudentList);
       },
       error=>{
         console.log(error);
       }
     )
   
+  }
+  isVerified(user : any){
+    return user.isVerified;
   }
 
 }

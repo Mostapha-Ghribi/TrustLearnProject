@@ -39,8 +39,16 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
 
-    let isLoggedIn = this.userService.isLoggedIn() ;
-    if (isLoggedIn){
+    let isLoggedInStudent = this.userService.isLoggedInStudent() ;
+    if (isLoggedInStudent){
+      this.router.navigate(['/home'])
+    }
+    let isLoggedInAdmin = this.userService.isLoggedInAdmin() ;
+    if (isLoggedInAdmin){
+      this.router.navigate(['/dashboard'])
+    }
+    let isLoggedInTrainer = this.userService.isLoggedInTrainer() ;
+    if (isLoggedInTrainer){
       this.router.navigate(['/home'])
     }
 
@@ -54,25 +62,38 @@ export class LoginComponent implements OnInit {
 
     this.userService.loginUser(user).subscribe(
       res => {
+        
         this.spinner.requestEnded();
         let email = res.result.email;
         let verified = res.result.isVerified;
         let role = res.role;
         let token = "";
+        localStorage.setItem("verified",verified)
+        localStorage.setItem("email",email)
+        localStorage.setItem("role",role)
         if(role == "student"){
           token = res.token; 
-        }else{
+          localStorage.setItem("token", token)
+          this.userService.isLoggedInStudent();
+          this.router.navigate(['/home'])
+
+        }else if (role == "teacher"){
           token = res.tokenTeacher;
+          localStorage.setItem("token", token)
+          this.router.navigate(['/home'])
+          this.userService.isLoggedInTrainer();
+        }else if (role == "admin"){
+          token = res.tokenAdmin;
+          localStorage.setItem("token", token)
+          this.router.navigate(['/dashboard'])
+          this.userService.isLoggedInAdmin();
         }
+
         
        
 
         //console.log(verified);
-        localStorage.setItem("verified",verified)
-        localStorage.setItem("email",email)
-        localStorage.setItem("token", token)
-        localStorage.setItem("role",role)
-        this.router.navigateByUrl('/home')
+      
         
 
       },

@@ -17,7 +17,9 @@
         <!-- ======= Cource Details Section ======= -->
         <section id="course-details" class="course-details">
             <div class="container" data-aos="fade-up">
-
+                <div *ngIf="Exist" class="alert alert-success" role="alert">
+                    You are already enroled In this course
+                </div>
                 <div class="row">
                     <div class="col-lg-8">
                         <img src="{{course.image}}" class="img-fluid" alt="">
@@ -26,15 +28,22 @@
                         <p>
                             {{course.description}}
                         </p>
-                        <div [hidden]="!isverified" class="level-god">
+                       <!-- <iframe [src]='safeURL' frameborder="0" allowfullscreen></iframe>
+
+                        <button class="js-video-button" data-video-id='L61p2uyiMSo'>Youtube</button>-->
+                       <div [hidden]="!isverified" class="level-god">
                         <ul   id="p_1_0_chapter"> 
                             <li id="L_9386_0" class="active  tabc-L_9386_0 TabSectionChp " style= "list-style-type: '+ ';">
                                 
-                               <h2 class="arrow">{{course.name}}</h2>
+                               <h2 class="arrow">{{course.name}} <span class="fas fa-caret-down"></span></h2>
                                 <ul *ngFor="let chapter of course.chapters" style="display: none;" class="childdd">
-                                    <li style= "list-style-type: '+ ';"><h4 class="arrow">{{chapter.name}}</h4>
+                                    <li style= "list-style-type: '+ ';"><h4 class="arrow">{{chapter.name}} <span class="fas fa-caret-down"></span></h4>
                               <ul  *ngFor="let lesson of chapter.lessons" style="display: none;"  class="childdd" >
-                                <li style= "list-style-type: '+ ';"><h5 class="arrow">{{lesson.name}}</h5>	
+                                <li style= "list-style-type: '+ ';"><h5 class="arrow">{{lesson.name}} <span class="fas fa-caret-down"></span></h5>	
+                                    <ul  *ngFor="let video of lesson.videos" style="display: none;"  class="childdd" >
+                                        <li style= "list-style-type: '+ ';"><h5 class="arrow">{{video.name}}</h5>	
+                                      </li>
+                                    </ul>
                               </li>
                             </ul>
                                 </li>
@@ -42,6 +51,24 @@
                         </li>
                         </ul>
                     </div>
+                    <!--<div class="dropdownMG">
+                        <label for="btn" class="button arrow">{{course.name}}
+                            <span class="fas fa-caret-down"></span>
+                            </label>
+                            <input type="checkbox" id="btn">
+                            <ul *ngFor="let chapter of course.chapters" style="display: none;" class="menu childdd">
+                               <li>
+                                  <label for="btn-2" class="first arrow">{{chapter.name}}
+                                  <span class="fas fa-caret-down"></span>
+                                  </label>
+                                  <input type="checkbox" id="btn-2">
+                                  <ul *ngFor="let lesson of chapter.lessons" style="display: none;" class="childdd">
+                                     <li><a href="#" class="arrow">{{lesson.name}}</a></li>
+                                  </ul>
+                               </li>
+                           
+                            </ul>
+                    </div>-->
                     </div>
                     <div class="col-lg-4">
 
@@ -63,6 +90,7 @@
 
                     </div>
                 </div>
+                
 
             </div>
         </section>
@@ -82,3 +110,6 @@
 
 
 </div>
+<script>
+    $(".js-video-button").modalVideo();
+</script>

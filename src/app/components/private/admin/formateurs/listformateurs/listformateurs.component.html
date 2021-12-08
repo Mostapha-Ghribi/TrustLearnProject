@@ -36,8 +36,7 @@
                                 <thead>
                                     <tr>
                                         <th>Profile Image</th>
-                                        <th>First Name</th>
-                                        <th>Last Name</th>
+                                        <th>Name</th>
                                         <th>Email</th>
                                         <th>Account state</th>
                                         <th>Actions</th>
@@ -46,12 +45,12 @@
                                 <tbody>
                                     <tr let teacher *ngFor="let teacher of TeachersList" >
 
-                                        <td><img src="http://placehold.it/200x200" width="100" height="100"> </td>
-                                        <td class="align-middle"></td>
-                                        <td class="align-middle">Ben Ammar</td>
-                                        <td class="align-middle">ahmedbenammar44@gmail.com</td>
+                                        <td><img src="{{teacher.avatar}}" width="100" height="100"> </td>
+                                        <td class="align-middle">{{teacher.name}}</td>
+                                        <td class="align-middle">{{teacher.email}}</td>
                                         <td class="align-middle">
-                                            <div class="badge badge-pill badge-success">Active</div>
+                                            <div *ngIf="isVerified(teacher)" class="badge badge-pill badge-success">Verified</div>
+                                            <div *ngIf="!isVerified(teacher)" class="badge badge-pill badge-danger">Not Verified</div>
                                         </td>
                                         <td class="align-middle">
                                             <button class="btn btn-sm btn-dark">
