@@ -35,11 +35,10 @@ this.service.requestStarted();
   }
 
 
-  delete(category: Category){
+  delete(category: any){
     let index = this.categories.indexOf(category) ;
     this.categories.splice(index, 1) ;
-
-    this.categoryService.deleteCategory(category.id).subscribe(
+    this.categoryService.deleteCategory(category._id).subscribe(
       res=>{
         console.log(res);
         
